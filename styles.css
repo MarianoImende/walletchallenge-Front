@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 20px;
+  }
+  
+  h1 {
+    color: #333;
+    text-align: center;
+  }
+
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 5px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+  
+  .response {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+
+/* Definición de la clase error */
+  .error {
+    color: red;
+  }
+
+  /* Definición de otra clase, por ejemplo, success */
+.success {
+  color: green;
+}
+
+/* Definición de una clase adicional, por ejemplo, warning */
+.warning {
+  color: orange;
+}
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+}
+  
+.my-custom-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 20px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2);
+}
+
+.my-custom-table th, .my-custom-table td {
+  text-align: left;
+  padding: 16px;
+}
+
+.my-custom-table th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.my-custom-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  margin: 0 auto; /* Centra el formulario horizontalmente en la página */
+}
+
