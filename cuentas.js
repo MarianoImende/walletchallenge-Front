@@ -9,7 +9,7 @@
     const jsonString = JSON.stringify(jsonData);
 
     try {
-      const response = await fetch(`https://walletchallenge.onrender.com/wallet/${endpoint}`, {
+      const response = await fetch(`https://walletchallenge-back.onrender.com/wallet/${endpoint}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
