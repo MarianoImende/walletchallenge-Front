@@ -9,7 +9,7 @@ document.getElementById('login-form').addEventListener('submit', async function(
     const password = document.getElementById('password').value;
   
     try {
-      const response = await fetch('https://walletchallenge.onrender.com/wallet/sesion', {
+      const response = await fetch('https://walletchallenge-back.onrender.com/wallet/sesion', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
