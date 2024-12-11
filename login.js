@@ -87,6 +87,7 @@ document.getElementById('login-form').addEventListener('submit', async function(
         }
       } else {
         // Si el login falla
+        const responseDiv = document.getElementById('response');
         responseDiv.className = 'error';
         responseDiv.innerHTML = `Error: ${data.detail || 'Error desconocido'}`;
       }
