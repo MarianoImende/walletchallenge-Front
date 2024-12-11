@@ -1,6 +1,50 @@
-// No necesitas importar Ajv, ya que lo cargaste en el HTML
 const loginForm = document.getElementById('login-form');
-console.log('¿Existe el elemento login-form?', !!loginForm);
+
+const schema={
+                "type": "object",
+                "additionalItems": true,
+                "properties": {
+                    "access_token": {
+                    "type": "string",
+                    "pattern":"^[a-zA-Z0-9]{20,40}\\.[a-zA-Z0-9]+\\.[a-zA-Z0-9_-]+$"
+                    },
+                    "token_type": {
+                    "type": "string",
+                    "pattern":"^bearer$"
+                    },
+                    "access_token_expires": {
+                        "type": "number",
+                        "pattern":"^\d+$"
+                    },
+                    "tarjetas": {
+                    "additionalItems": false,
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                        "descripcion": {
+                            "type": "string",
+                            "pattern":"^[A-Z\\s]{1,40}$"
+                        },
+                        "numero": {
+                            "type": "string",
+                            "pattern":"^[0-9]{12,19}$"
+                        }
+                        },
+                        "required": [
+                        "descripcion",
+                        "numero"
+                        ]
+                    }
+                    }
+                },
+                "required": [
+                    "access_token",
+                    "token_type",
+                    "access_token_expires",
+                    "tarjetas"
+                ]
+}
 
 document.getElementById('login-form').addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -18,57 +62,11 @@ document.getElementById('login-form').addEventListener('submit', async function(
       });
       
       const data = await response.json();
-
-      const schema = {
-        "$schema": "http://json-schema.org/draft-07/schema#",
-        "title": "Generated schema for Root",
-        "type": "object",
-        "properties": {
-          "access_token": {
-            "type": "string",
-            "pattern": "^[A-Za-z0-9-_]{20,40}\\.[A-Za-z0-9-_]{20,200}\\.[A-Za-z0-9-_]{43,64}$"
-         },
-          "token_type": {
-            "type": "string",
-            "pattern": "^bearer$"
-          },
-          "access_token_expires": {
-            "type": "string",
-            "pattern": "^\\d+$"
-          },
-          "tarjetas": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "descripcion": {
-                  "type": "string",
-                  "pattern": "^[A-Z\\s]{1,40}$"
-                },
-                "numero": {
-                  "type": "string",
-                  "pattern": "^[0-9]{10,15}$"
-                }
-              },
-              "required": [
-                "descripcion",
-                "numero"
-              ]
-            }
-          }
-        },
-        "required": [
-          "access_token",
-          "token_type",
-          "access_token_expires",
-          "tarjetas"
-        ]
-      };
-
-      const responseDiv = document.getElementById('response');
-      responseDiv.innerHTML = ''; // Limpiar contenido anterior
       
       if (response.ok) {
+        const responseDiv = document.getElementById('response');
+        responseDiv.innerHTML = ''; // Limpiar contenido anterior
+        
         const ajv = new window.Ajv();
         const validate = ajv.compile(schema);
         const valid = validate(data);
