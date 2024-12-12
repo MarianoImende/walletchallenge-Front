@@ -1,36 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consumo de API de Sesión</title>
-    <link rel="stylesheet" href="/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página de Acceso a la API</title>
 
-
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <script src="cuentas.js"></script>
+    
 </head>
 <body>
-    <h1>Login de Sesión</h1>
-    <div class="container"></div>
-        <form id="login-form" class="login-form">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" value="" required>
-            <br><br>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" value="" required>
-            <br><br>
-            <button type="submit">Iniciar Sesión</button>
-        </form>
-    </div>
-    <br>
-    <div id="response"></div>
+  <h1>Wallet Challenge</h1>
+  <p>¡Bienvenido! Ha iniciado sesión correctamente.</p>
+   
+  <button onclick="callApi('cuentas')">Cuentas</button>
+  <input type="text" id="tarjeta" placeholder="Ingrese número de tarjeta" value="">
+  <button onclick="callApi('endpoint2')">Saldo</button>
+  <button onclick="callApi('endpoint3')">Movimiéntos</button>
+  <button onclick="callApi('endpoint4')">pago</button>
+  <button onclick="callApi('endpoint4')">Estado</button>
+  <button onclick="callApi('endpoint4')">Salir</button>
+  
+  <div id="responseCuentas" class="response"></div>
+  <div id="responseUsuario" class="response"></div>
 
-     <!-- Cargar Ajv desde CDN -->
-     <script src="ajv.min.js"></script>
-     <script src="login.js"></script>
-     
-    <!--<script src="script.js"></script>-->
-    
+  </body>
+<script>
+ 
+  const data = JSON.parse(localStorage.getItem('DatosUsuario'));
+  responseUsuario.innerHTML = getTablaDatosUsuario(data);
 
-</body>
-
+</script>
 </html>
