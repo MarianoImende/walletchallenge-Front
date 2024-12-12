@@ -80,7 +80,7 @@ document.getElementById('login-form').addEventListener('submit', async function(
           responseDiv.innerHTML = 'Login Exitoso, redirigiendo a la página principal...'
           setTimeout(() => {
             window.location.href = 'home.html';
-          }, 1500); 
+          }, 2000); 
         } else {
           console.log("Response JSON no cumple con el esquema:", validate.errors);
           responseDiv.innerHTML = `<p>Response JSON no cumple con el esquema:</p><pre>${JSON.stringify(validate.errors, null, 2)}</pre>`;
