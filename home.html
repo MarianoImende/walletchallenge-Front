@@ -5,27 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Página de Acceso a la API</title>
 
+  <!-- Enlace al nuevo archivo de estilos unificado -->
   <link rel="stylesheet" href="styles.css">
   
+  <!-- Archivo de JavaScript -->
   <script src="cuentas.js"></script>
-    
 </head>
 <body>
+  <!-- Encabezado principal -->
   <h1>Wallet Challenge</h1>
   <p>¡Bienvenido! Ha iniciado sesión correctamente.</p>
-   
-  <button onclick="callApi('cuentas')">Cuentas</button>
-  <input type="text" id="tarjeta" placeholder="Ingrese número de tarjeta" value="">
-  <button onclick="callApi('endpoint2')">Saldo</button>
-  <button onclick="callApi('endpoint3')">Movimiéntos</button>
-  <button onclick="callApi('endpoint4')">pago</button>
-  <button onclick="callApi('endpoint4')">Estado</button>
-  <button onclick="callApi('endpoint4')">Salir</button>
-  
+
+  <!-- Controles interactivos -->
+  <div class="buttons-container">
+    <button onclick="callApi('cuentas')">Cuentas</button>
+    <input type="text" id="tarjeta" placeholder="Ingrese número de tarjeta" value="">
+    <button onclick="callApi('endpoint2')">Saldo</button>
+    <button onclick="callApi('endpoint3')">Movimientos</button>
+    <button onclick="callApi('endpoint4')">Pago</button>
+    <button onclick="callApi('endpoint5')">Estado</button>
+    <button onclick="callApi('endpoint6')">Salir</button>
+  </div>
+
+  <!-- Respuesta del API -->
   <div id="responseCuentas" class="response"></div>
   <div id="responseUsuario" class="response"></div>
 
-  </body>
+</body>
 <script>
  
   const data = JSON.parse(localStorage.getItem('DatosUsuario'));
