@@ -1,53 +1,107 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 20px;
-  }
-  
-  h1 {
-    color: #333;
-    text-align: center;
-  }
+/* Archivo styles.css */
 
+/* General Reset */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: #f4f4f9; /* Mantiene el fondo */
+  color: #333;
+  text-align: center;
+}
+
+h1 {
+  margin-top: 20px;
+  font-size: 2.5rem; /* Mantiene el tamaño */
+  color: #0056b3; /* Mantiene el color */
+  text-align: center;
+}
+
+p {
+  margin: 10px 0 20px;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px; /* Espaciado entre botones */
+  margin-bottom: 30px; /* Espacio extra debajo del contenedor de botones */
+}
 
 button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 5px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background: #007bff; /* Mantiene el color */
+  color: #fff;
+  font-size: 1rem;
   cursor: pointer;
+  transition: transform 0.2s, background 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Nueva sombra */
 }
-  
-  .response {
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-  }
 
-/* Definición de la clase error */
-  .error {
-    color: red;
-  }
+button:hover {
+  background: #0056b3;
+  transform: scale(1.05); /* Animación al pasar el mouse */
+}
 
-  /* Definición de otra clase, por ejemplo, success */
+input[type="text"] {
+  width: 300px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.response {
+  margin-top: 20px;
+  padding: 10px;
+  background: #e9ecef;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #333;
+  text-align: left;
+}
+
+/* Clases existentes */
+.error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  text-align: left;
+}
+
 .success {
-  color: green;
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
 }
 
-/* Definición de una clase adicional, por ejemplo, warning */
 .warning {
   color: orange;
 }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
+/* Tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
 }
-  
+
 .my-custom-table {
   border-collapse: collapse;
   width: 100%;
@@ -56,13 +110,14 @@ button {
   box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2);
 }
 
-.my-custom-table th, .my-custom-table td {
+.my-custom-table th,
+.my-custom-table td {
   text-align: left;
   padding: 16px;
 }
 
 .my-custom-table th {
-  background-color: #4CAF50;
+  background-color: #77dc7a; /* Mantiene el color de encabezado */
   color: white;
 }
 
@@ -70,6 +125,7 @@ button {
   background-color: #f2f2f2;
 }
 
+/* Login Form */
 .login-form {
   display: flex;
   flex-direction: column;
@@ -80,5 +136,62 @@ button {
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  margin: 0 auto; /* Centra el formulario horizontalmente en la página */
+  margin: 0 auto;
+}
+
+/* Nuevos estilos para centrado */
+.centered-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Sombra en las tablas */
+table tr:hover {
+  background-color: #dbf4db; /* Resalta la fila al pasar el mouse */
+}
+
+/* Estilo mejorado del formulario */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  margin: 30px auto; /* Centrado en la página */
+  padding: 30px;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-form label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.login-form button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+  background-color: #0056b3;
 }
