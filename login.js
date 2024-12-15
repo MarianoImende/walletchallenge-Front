@@ -1,50 +1,47 @@
 const loginForm = document.getElementById('login-form');
-
 const schema={
-                "type": "object",
-                "additionalItems": true,
-                "properties": {
-                    "access_token": {
-                    "type": "string",
-                    "pattern":"^[a-zA-Z0-9]{20,40}\\.[a-zA-Z0-9]+\\.[a-zA-Z0-9_-]+$"
-                    },
-                    "token_type": {
-                    "type": "string",
-                    "pattern":"^bearer$"
-                    },
-                    "access_token_expires": {
-                        "type": "number",
-                        "pattern":"^\d+$"
-                    },
-                    "tarjetas": {
-                    "additionalItems": false,
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                        "descripcion": {
-                            "type": "string",
-                            "pattern":"^[A-Z\\s]{1,40}$"
-                        },
-                        "numero": {
-                            "type": "string",
-                            "pattern":"^[0-9]{12,19}$"
-                        }
-                        },
-                        "required": [
-                        "descripcion",
-                        "numero"
-                        ]
-                    }
-                    }
-                },
-                "required": [
-                    "access_token",
-                    "token_type",
-                    "access_token_expires",
-                    "tarjetas"
-                ]
-}
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+      "access_token": {
+      "type": "string",
+      "pattern":"^[a-zA-Z0-9]{20,40}\\.[a-zA-Z0-9]+\\.[a-zA-Z0-9_-]+$"
+      },
+      "token_type": {
+      "type": "string",
+      "pattern":"^bearer$"
+      },
+      "access_token_expires": {
+          "type": "integer",
+          "pattern":"^\\d+$"
+      },
+      "tarjetas": {
+      "type": "array",
+      "items": {
+          "type": "object",
+          "properties": {
+          "descripcion": {
+              "type": "string",
+              "pattern":"^[A-Z\\s]{1,40}$"
+          },
+          "numero": {
+              "type": "string",
+              "pattern":"^[0-9]{12,19}$"
+          }
+          },
+          "required": [
+          "descripcion",
+          "numero"
+          ]
+      }
+      }
+  },
+  "required": [
+      "access_token",
+      "token_type",
+      "access_token_expires",
+      "tarjetas"
+  ]};
 
 document.getElementById('login-form').addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -52,8 +49,11 @@ document.getElementById('login-form').addEventListener('submit', async function(
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
   
+    const local = "http://127.0.0.1:1976/wallet/sesion"
+    const prod = "https://walletchallenge-back.onrender.com/wallet/sesion"
+
     try {
-      const response = await fetch('https://walletchallenge-back.onrender.com/wallet/sesion', {
+      const response = await fetch(prod, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -82,8 +82,9 @@ document.getElementById('login-form').addEventListener('submit', async function(
             window.location.href = 'home.html';
           }, 3000); 
         } else {
-          console.log("Response JSON no cumple con el esquema:", validate.errors);
-          responseDiv.innerHTML = `<p>Response JSON no cumple con el esquema:</p><pre>${JSON.stringify(validate.errors, null, 2)}</pre>`;
+          console.log("Response JSON no cumple con el esquema esperado:", validate.errors);
+          responseDiv.className = 'error';
+          responseDiv.innerHTML = `<p>Response JSON no cumple con el esquema esperado:</p><pre>${JSON.stringify(validate.errors, null, 2)}</pre>`;
         }
       } else {
         // Si el login falla
