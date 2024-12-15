@@ -1,4 +1,4 @@
- // Función de ejemplo para llamadas a la API (se puede ampliar según sea necesario)
+// Función de ejemplo para llamadas a la API
   async function callApi(endpoint) {
     const numero_tarjeta = document.getElementById('tarjeta').value; // Obtener valor de la entrada
 
@@ -7,9 +7,10 @@
     };
     
     const jsonString = JSON.stringify(jsonData);
-
+    const local = "http://127.0.0.1:1976/wallet/"
+    const prod = "https://walletchallenge-back.onrender.com/wallet/"
     try {
-      const response = await fetch(`https://walletchallenge-back.onrender.com/wallet/${endpoint}`, {
+      const response = await fetch(`${prod}${endpoint}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -35,8 +36,7 @@
       const responseDiv = document.getElementById('responseCuentas'); // Asegúrate de seleccionar el mismo div
       responseDiv.className = 'error'; // Aplicar la clase de error
       responseDiv.innerHTML = `Error: ${error.message}`; // Mostrar mensaje de error
-    }
-    
+    }    
 };
 
 function getTablaDatosUsuario(data){
@@ -58,8 +58,7 @@ function getTablaDatosUsuario(data){
   
     table += '</tbody></table>'
     return table
-}
-  
+}  
 
 function getTablaCuentas(data){
   let table = '<table class="my-custom-table"><thead><tr><th>Clave</th><th>Valor</th></tr></thead><tbody>';
@@ -76,8 +75,7 @@ function getTablaCuentas(data){
             table += `<tr><td>Cuenta ${index + 1} - Número</td><td>${cuentas.numero_cuenta}</td></tr>`;
             table += `<tr><td>Cuenta ${index + 1} - Tipo</td><td>${cuentas.tipo}</td></tr>`;
         });
-    }
-  
+    }  
     table += '</tbody></table>'
     return table
 }
