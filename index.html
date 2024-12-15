@@ -3,33 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consumo de API de Sesión</title>
+    <title>Login de Sesión</title>
+    <!-- Enlace al archivo de estilos CSS -->
     <link rel="stylesheet" href="styles.css">
-
-
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
+    <!-- Encabezado -->
     <h1>Login de Sesión</h1>
-    <div class="container"></div>
+    
+    <!-- Contenedor del formulario -->
+    <div class="container">
         <form id="login-form" class="login-form">
+            <!-- Campo de usuario -->
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" value="" required>
-            <br><br>
+            <input type="text" id="username" name="username" required>
+            
+            <!-- Campo de contraseña -->
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" value="" required>
-            <br><br>
+            <input type="password" id="password" name="password" required>
+            
+            <!-- Botón de envío -->
             <button type="submit">Iniciar Sesión</button>
         </form>
     </div>
-    <br>
-    <div id="response"></div>
 
-     <!-- Cargar Ajv desde CDN -->
-     <script src="ajv.min.js"></script>
-     <script src="login.js"></script>
-     
-    <!--<script src="script.js"></script>-->
+    <!-- Área de respuesta -->
+    <!-- <div id="response" class="response"></div> -->
+    <div id="response" class="response">
+        <div id="success-message" class="success" style="display: none;">✔ Éxito</div>
+        <div id="error-message" class="error" style="display: none;">✘ Error</div>
+        <div id="warning-message" class="warning" style="display: none;">⚠ Advertencia</div>
+    </div>
     
-</body>
 
+    <!-- Scripts -->
+    <script src="ajv.min.js"></script>
+    <script src="login.js"></script>
+</body>
 </html>
+
