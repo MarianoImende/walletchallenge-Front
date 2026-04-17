@@ -220,3 +220,83 @@ table tr:hover {
   max-width: 1200px;
   margin: 0 auto 14px auto;
 }
+
+.top-panel {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto 24px auto;
+}
+
+.operation-row {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.operation-group {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  background: #efefef;
+  padding: 14px 16px;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.field-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.field-block label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.field-block input {
+  min-width: 260px;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.secondary-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.section-title {
+  cursor: pointer;
+  background-color: #f0f0f0;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin: 18px auto 8px auto;
+  width: 90%;
+  max-width: 1200px;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: left;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.section-title:hover {
+  background-color: #e4e4e4;
+}
+
+.section-content {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto 14px auto;
+}
+
+.response {
+  margin-top: 0;
+}
