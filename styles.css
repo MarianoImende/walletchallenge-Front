@@ -195,3 +195,28 @@ table tr:hover {
 .login-form button:hover {
   background-color: #0056b3;
 }
+
+.section-title {
+  cursor: pointer;
+  background-color: #f0f0f0;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin: 18px auto 8px auto;
+  width: 90%;
+  max-width: 1200px;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: left;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.section-title:hover {
+  background-color: #e4e4e4;
+}
+
+.section-content {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto 14px auto;
+}
