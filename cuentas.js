@@ -33,6 +33,7 @@ async function callApi(endpoint) {
 
   if (endpoint === 'saldo' && !numero_cuenta) {
     responseDiv.className = 'warning';
+    responseDiv.innerHTML = '';
     responseDiv.innerHTML = 'Advertencia: debe ingresar un número de cuenta';
     openSection(sectionName);
     return;
