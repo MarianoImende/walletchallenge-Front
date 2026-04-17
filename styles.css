@@ -236,7 +236,7 @@ table tr:hover {
 }
 
 
-.operation-group {
+.operation-groupp {
   display: flex;
   flex-direction: column;   /* 👈 ESTE CAMBIO ES CLAVE */
   gap: 10px;
@@ -244,6 +244,12 @@ table tr:hover {
   padding: 16px;
   border-radius: 8px;
   min-width: 320px;
+}
+
+.operation-group {
+  background: white;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .field-block {
