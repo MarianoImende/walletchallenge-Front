@@ -268,8 +268,8 @@ table tr:hover {
 .secondary-actions {
   display: flex;
   gap: 12px;
-  flex-wrap: wrap;
   justify-content: center;
+  margin-top: 8px;   /* 👈 esto es clave */
 }
 
 .section-title {
