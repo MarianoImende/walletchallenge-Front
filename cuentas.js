@@ -16,7 +16,7 @@ async function callApi(endpoint) {
     sectionName = 'cuentas';
   } else if (endpoint === 'saldo') {
     jsonData = { numero_cuenta: numero_cuenta };
-    responseDiv = document.getElementById('responseSaldo');
+    responseDiv = document.getElementById('saldoInline'); 
     sectionName = 'saldo';
   } else {
     alert(`Endpoint no soportado todavía: ${endpoint}`);
