@@ -116,11 +116,11 @@
       }
     }
 
-    const data = JSON.parse(localStorage.getItem('DatosUsuario'));
-    if (data) {
-      document.getElementById('responseUsuario').innerHTML = getTablaDatosUsuario(data);
-    }
-
+const rawData = localStorage.getItem('DatosUsuario');
+if (rawData) {
+  const data = JSON.parse(rawData);
+  document.getElementById('responseUsuario').innerHTML = getTablaDatosUsuario(data);
+}
     // Estado inicial
     openSection("usuario");
     closeSection("cuentas");
