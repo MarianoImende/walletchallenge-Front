@@ -235,14 +235,10 @@ table tr:hover {
   flex-wrap: wrap;
 }
 
+
 .operation-group {
-  display: flex;
-  flex-direction: column;   /* 👈 ESTE CAMBIO ES CLAVE */
-  gap: 10px;
-  background: #efefef;
-  padding: 16px;
-  border-radius: 8px;
-  min-width: 320px;
+  background: #f5f7fa;  /* más suave */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
 .field-block {
