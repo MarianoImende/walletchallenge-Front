@@ -4,42 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login de Sesión</title>
-    <!-- Enlace al archivo de estilos CSS -->
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-    <!-- Encabezado -->
-    <h1>Login de Sesión</h1>
-    
-    <!-- Contenedor del formulario -->
-    <div class="container">
-        <form id="login-form" class="login-form">
-            <!-- Campo de usuario -->
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            
-            <!-- Campo de contraseña -->
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            
-            <!-- Botón de envío -->
-            <button type="submit">Iniciar Sesión</button>
-        </form>
-    </div>
 
-    <!-- Área de respuesta -->
-    <!-- <div id="response" class="response"></div> -->
-    <div id="response" class="response">
-        <div id="success-message" class="success" style="display: none;">✔ Éxito</div>
-        <div id="error-message" class="error" style="display: none;">✘ Error</div>
-        <div id="warning-message" class="warning" style="display: none;">⚠ Advertencia</div>
-    </div>
-    
+    <!-- Encabezado tipo home banking -->
+    <header class="app-header">
+        <div class="app-header__brand">🏦 Wallet Challenge</div>
+    </header>
 
-    <!-- Scripts -->
+    <main class="login-page">
+        <section class="login-card">
+            <h1 class="login-title">Ingreso al Home Banking</h1>
+            <p class="login-subtitle">Accedé con tu usuario y contraseña</p>
+
+            <form id="login-form" class="login-form" data-testid="login-form">
+                <label for="username">Usuario</label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    required
+                    data-testid="username-input"
+                    autocomplete="username"
+                >
+
+                <label for="password">Contraseña</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    required
+                    data-testid="password-input"
+                    autocomplete="current-password"
+                >
+
+                <button type="submit" data-testid="login-button">Iniciar Sesión</button>
+            </form>
+
+            <div id="response" class="response login-response" data-testid="login-response">
+                <div id="success-message" class="success" style="display: none;" data-testid="success-message">
+                    ✔ Inicio de sesión exitoso
+                </div>
+                <div id="error-message" class="error" style="display: none;" data-testid="error-message">
+                    ✘ Error de autenticación
+                </div>
+                <div id="warning-message" class="warning" style="display: none;" data-testid="warning-message">
+                    ⚠ Advertencia
+                </div>
+            </div>
+        </section>
+    </main>
+
     <script src="ajv.min.js"></script>
     <script src="login.js"></script>
 </body>
 </html>
+
 
