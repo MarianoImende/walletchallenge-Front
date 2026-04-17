@@ -3,59 +3,16 @@
    Estilo general tipo home banking
    ========================= */
 
-/* Reset básico */
+/* =========================
+   Reset básico
+   ========================= */
 * {
   box-sizing: border-box;
 }
 
-.login-title {
-  font-size: 1.8rem;
-  margin-bottom: 5px;
-}
-
-.login-subtitle {
-  margin-bottom: 15px;
-}
-
-input:focus {
-  outline: none;
-  border: 1px solid #0d47a1;
-  box-shadow: 0 0 0 2px rgba(13, 71, 161, 0.15);
-}
-
-.login-card {
-  animation: fadeIn 0.4s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.login-form button {
-  margin-top: 18px;
-  width: 100%;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-}
-
-.login-page {
-  align-items: flex-start;
-  padding-top: 40px;
-}
-
-.login-security {
-  font-size: 0.85rem;
-  color: #6c757d;
-  margin-top: 15px;
-}
-
+/* =========================
+   Base general
+   ========================= */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -65,27 +22,34 @@ body {
   text-align: center;
 }
 
-/* =========================
-   Títulos y textos
-   ========================= */
-
 h1 {
-  margin-top: 20px;
-  font-size: 2.8rem;
-  color: #0056b3;
-  text-align: center;
+  margin: 0;
 }
 
 p {
-  margin: 10px 0 20px;
-  font-size: 1.2rem;
+  margin: 0;
   color: #555;
+}
+
+/* =========================
+   Header general
+   ========================= */
+.app-header {
+  background: #0d47a1;
+  color: white;
+  padding: 14px 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.app-header__brand {
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: left;
 }
 
 /* =========================
    Contenedores generales
    ========================= */
-
 .container {
   max-width: 800px;
   margin: 0 auto;
@@ -105,19 +69,54 @@ p {
 /* =========================
    Login
    ========================= */
+.login-page {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 36px 20px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 430px;
+  background: #ffffff;
+  border: 1px solid #d9e2ec;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  padding: 28px 26px;
+  animation: fadeIn 0.4s ease;
+}
+
+.login-title {
+  font-size: 1.8rem;
+  margin: 0 0 8px 0;
+  color: #0056b3;
+}
+
+.login-subtitle {
+  margin: 0 0 16px 0;
+  font-size: 1.05rem;
+  color: #555;
+}
+
+.login-security {
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin: 14px 0 0 0;
+}
 
 .login-form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: stretch;
-  width: 320px;
-  padding: 24px;
-  border: 1px solid #d9e2ec;
-  border-radius: 10px;
-  background: #ffffff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-  margin: 0 auto;
+  width: 100%;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  margin: 0;
 }
 
 .login-form label {
@@ -125,12 +124,26 @@ p {
   font-weight: 600;
   margin-bottom: 6px;
   margin-top: 10px;
+  color: #243b53;
+}
+
+.login-form button {
+  margin-top: 18px;
+  width: 100%;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.login-response {
+  margin-top: 16px;
+  background: transparent;
+  border: none;
+  padding: 0;
 }
 
 /* =========================
    Inputs
    ========================= */
-
 input[type="text"],
 input[type="password"] {
   width: 100%;
@@ -153,7 +166,6 @@ input[type="password"]:focus {
 /* =========================
    Botones generales
    ========================= */
-
 button {
   padding: 10px 18px;
   border: none;
@@ -179,9 +191,24 @@ button:disabled {
 }
 
 /* =========================
+   Home - encabezado textual
+   ========================= */
+.home-title {
+  margin-top: 20px;
+  font-size: 2.8rem;
+  color: #0056b3;
+  text-align: center;
+}
+
+.home-subtitle {
+  margin: 10px 0 20px;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+/* =========================
    Home banking top panel
    ========================= */
-
 .top-panel {
   width: 92%;
   max-width: 1300px;
@@ -241,7 +268,7 @@ button:disabled {
   margin-top: 8px;
 }
 
-/* Compatibilidad con versión vieja */
+/* Compatibilidad con versión anterior */
 .buttons-container {
   display: flex;
   flex-wrap: wrap;
@@ -253,7 +280,6 @@ button:disabled {
 /* =========================
    Secciones colapsables
    ========================= */
-
 .section-title {
   cursor: pointer;
   background-color: #e8f1fb;
@@ -267,7 +293,6 @@ button:disabled {
   font-weight: 700;
   text-align: left;
   user-select: none;
-  box-sizing: border-box;
   transition: background-color 0.2s ease;
 }
 
@@ -284,7 +309,6 @@ button:disabled {
 /* =========================
    Respuestas / mensajes
    ========================= */
-
 .response {
   margin-top: 0;
   padding: 12px;
@@ -300,7 +324,7 @@ button:disabled {
   color: #842029;
   background-color: #f8d7da;
   border: 1px solid #f1aeb5;
-  text-align: left;
+  text-align: center;
   border-radius: 6px;
   padding: 10px 12px;
 }
@@ -313,11 +337,7 @@ button:disabled {
   border-radius: 6px;
   padding: 10px 12px;
 }
-.success_old {
-  color: #155724;
-  background-color: #d4edda;
-  border-color: #c3e6cb;
-}
+
 .warning {
   color: #8a6d3b;
   background-color: #fff3cd;
@@ -330,7 +350,6 @@ button:disabled {
 /* =========================
    Tablas
    ========================= */
-
 table {
   width: 100%;
   border-collapse: collapse;
@@ -373,9 +392,7 @@ table {
 
 /* =========================
    Tarjeta especial de saldo
-   (opcional para más adelante)
    ========================= */
-
 .saldo-card {
   background: #ffffff;
   padding: 22px;
@@ -397,9 +414,8 @@ table {
 }
 
 /* =========================
-   Loader opcional
+   Loader
    ========================= */
-
 .loader {
   border: 4px solid #e9ecef;
   border-top: 4px solid #1976d2;
@@ -416,12 +432,22 @@ table {
   }
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* =========================
    Responsive
    ========================= */
-
 @media (max-width: 900px) {
-  h1 {
+  .home-title {
     font-size: 2.2rem;
   }
 
@@ -440,5 +466,9 @@ table {
 
   .secondary-actions button {
     flex: 1 1 auto;
+  }
+
+  .login-card {
+    max-width: 100%;
   }
 }
