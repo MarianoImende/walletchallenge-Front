@@ -38,6 +38,9 @@
 <script>
  
   const data = JSON.parse(localStorage.getItem('DatosUsuario'));
+  if (key !== 'tarjetas' && key !== 'access_token') {
+    table += `<tr><td>${key}</td><td>${data[key]}</td></tr>`;
+  }
   responseUsuario.innerHTML = getTablaDatosUsuario(data);
 
 </script>
