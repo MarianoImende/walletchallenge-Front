@@ -162,7 +162,22 @@ input[type="password"]:focus {
   border: 1px solid #1976d2;
   box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.18);
 }
+select {
+  width: 100%;
+  border: 1px solid #cfd8dc;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 1rem;
+  background-color: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
 
+select:focus {
+  outline: none;
+  border: 1px solid #1976d2;
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.18);
+}
 /* =========================
    Botones generales
    ========================= */
