@@ -110,6 +110,32 @@ function getTablaDatosUsuario(data) {
 }
 
 function getTablaCuentas(data) {
+  let html = '<div class="cuentas-grid">';
+
+  if (data.cuentas && Array.isArray(data.cuentas)) {
+    data.cuentas.forEach((cuenta, index) => {
+      html += `
+        <div class="cuenta-card">
+          <div class="cuenta-card-header">Cuenta ${index + 1}</div>
+          <div class="cuenta-tipo">${cuenta.tipo}</div>
+          <div class="cuenta-numero">${cuenta.numero_cuenta}</div>
+        </div>
+      `;
+    });
+  } else {
+    html += `
+      <div class="warning">
+        No se encontraron cuentas para la tarjeta seleccionada.
+      </div>
+    `;
+  }
+
+  html += '</div>';
+  return html;
+}
+
+/*
+function getTablaCuentas(data) {
   let table = '<table class="my-custom-table"><thead><tr><th>Clave</th><th>Valor</th></tr></thead><tbody>';
 
   // Mostrar claves principales
@@ -130,7 +156,9 @@ function getTablaCuentas(data) {
   table += '</tbody></table>';
   return table;
 }
+*/
 
+/*
 function getTablaSaldo(data, numero_cuenta) {
   let table = '<table class="my-custom-table"><thead><tr><th>Clave</th><th>Valor</th></tr></thead><tbody>';
 
@@ -139,4 +167,14 @@ function getTablaSaldo(data, numero_cuenta) {
 
   table += '</tbody></table>';
   return table;
+}
+*/
+function getTablaSaldo(data, numero_cuenta) {
+  return `
+    <div class="saldo-card">
+      <h3>Saldo disponible</h3>
+      <div class="saldo-cuenta">Cuenta ${numero_cuenta}</div>
+      <p>$ ${data.saldo}</p>
+    </div>
+  `;
 }
