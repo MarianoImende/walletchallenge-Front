@@ -3,43 +3,45 @@ async function callApi(endpoint) {
   const numero_tarjeta = document.getElementById('tarjeta')?.value.trim() || '';
   const numero_cuenta = document.getElementById('cuenta')?.value.trim() || '';
 
-  const local = "http://127.0.0.1:1976/wallet/";
   const prod = "https://walletchallenge-back.onrender.com/wallet/";
 
   let jsonData = {};
-  let responseDiv = document.getElementById('responseCuentas');
+  let responseDiv = null;
+  let sectionName = '';
 
-  // Definir body y div de respuesta según endpoint
+  // Definir body, div y sección según endpoint
   if (endpoint === 'cuentas') {
-    jsonData = {
-      numero_tarjeta: numero_tarjeta
-    };
+    jsonData = { numero_tarjeta: numero_tarjeta };
     responseDiv = document.getElementById('responseCuentas');
+    sectionName = 'cuentas';
   } else if (endpoint === 'saldo') {
-    jsonData = {
-      numero_cuenta: numero_cuenta
-    };
+    jsonData = { numero_cuenta: numero_cuenta };
     responseDiv = document.getElementById('responseSaldo');
+    sectionName = 'saldo';
   } else {
-    responseDiv.className = 'error';
-    responseDiv.innerHTML = `Error: endpoint no soportado (${endpoint})`;
+    alert(`Endpoint no soportado todavía: ${endpoint}`);
     return;
   }
 
-  // Validaciones básicas antes de llamar
+  // Validaciones básicas
   if (endpoint === 'cuentas' && !numero_tarjeta) {
     responseDiv.className = 'warning';
     responseDiv.innerHTML = 'Advertencia: debe ingresar un número de tarjeta';
+    openSection(sectionName);
     return;
   }
 
   if (endpoint === 'saldo' && !numero_cuenta) {
     responseDiv.className = 'warning';
     responseDiv.innerHTML = 'Advertencia: debe ingresar un número de cuenta';
+    openSection(sectionName);
     return;
   }
 
-  const jsonString = JSON.stringify(jsonData);
+  // Mostrar loading
+  responseDiv.className = 'response';
+  responseDiv.innerHTML = 'Cargando...';
+  openSection(sectionName);
 
   try {
     const response = await fetch(`${prod}${endpoint}`, {
@@ -48,12 +50,19 @@ async function callApi(endpoint) {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + localStorage.getItem('token')
       },
-      body: jsonString
+      body: JSON.stringify(jsonData)
     });
 
-    const data = await response.json();
+    let data = null;
+    const contentType = response.headers.get('content-type') || '';
 
-    // Restablecer clase y limpiar contenido anterior
+    if (contentType.includes('application/json')) {
+      data = await response.json();
+    } else {
+      const text = await response.text();
+      data = { detail: text || 'Respuesta no JSON del servidor' };
+    }
+
     responseDiv.className = 'response';
     responseDiv.innerHTML = '';
 
@@ -63,13 +72,17 @@ async function callApi(endpoint) {
       } else if (endpoint === 'saldo') {
         responseDiv.innerHTML = getTablaSaldo(data, numero_cuenta);
       }
+      openSection(sectionName);
     } else {
       responseDiv.className = 'error';
       responseDiv.innerHTML = `Error: ${data.detail || 'Error desconocido'}`;
+      openSection(sectionName);
     }
+
   } catch (error) {
     responseDiv.className = 'error';
-    responseDiv.innerHTML = `Error: ${error.message}`;
+    responseDiv.innerHTML = `Error de red o conexión: ${error.message}`;
+    openSection(sectionName);
   }
 }
 
