@@ -1,81 +1,128 @@
 // Función de ejemplo para llamadas a la API
-  async function callApi(endpoint) {
-    const numero_tarjeta = document.getElementById('tarjeta').value; // Obtener valor de la entrada
+async function callApi(endpoint) {
+  const numero_tarjeta = document.getElementById('tarjeta')?.value.trim() || '';
+  const numero_cuenta = document.getElementById('cuenta')?.value.trim() || '';
 
-    const jsonData = {
-      "numero_tarjeta": numero_tarjeta // Usar el valor de la variable "cuenta"
+  const local = "http://127.0.0.1:1976/wallet/";
+  const prod = "https://walletchallenge-back.onrender.com/wallet/";
+
+  let jsonData = {};
+  let responseDiv = document.getElementById('responseCuentas');
+
+  // Definir body y div de respuesta según endpoint
+  if (endpoint === 'cuentas') {
+    jsonData = {
+      numero_tarjeta: numero_tarjeta
     };
-    
-    const jsonString = JSON.stringify(jsonData);
-    const local = "http://127.0.0.1:1976/wallet/"
-    const prod = "https://walletchallenge-back.onrender.com/wallet/"
-    try {
-      const response = await fetch(`${prod}${endpoint}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + localStorage.getItem('token') // Ejemplo de encabezado de autenticación
-        },
-        body: jsonString // Enviar body en string
-      });
-    
-      const data = await response.json();
-      const responseDiv = document.getElementById('responseCuentas');
-      
-      // Restablecer la clase antes de mostrar cualquier mensaje
-      responseDiv.className = 'response';
-      responseDiv.innerHTML = ''; // Limpiar contenido anterior
-    
-      if (response.ok) {
-        responseDiv.innerHTML = getTablaCuentas(data); // Mostrar datos exitosos
-      } else {
-        responseDiv.className = 'error';
-        responseDiv.innerHTML = `Error: ${data.detail || 'Error desconocido'}`; // Mostrar error de la respuesta
+    responseDiv = document.getElementById('responseCuentas');
+  } else if (endpoint === 'saldo') {
+    jsonData = {
+      numero_cuenta: numero_cuenta
+    };
+    responseDiv = document.getElementById('responseSaldo');
+  } else {
+    responseDiv.className = 'error';
+    responseDiv.innerHTML = `Error: endpoint no soportado (${endpoint})`;
+    return;
+  }
+
+  // Validaciones básicas antes de llamar
+  if (endpoint === 'cuentas' && !numero_tarjeta) {
+    responseDiv.className = 'warning';
+    responseDiv.innerHTML = 'Advertencia: debe ingresar un número de tarjeta';
+    return;
+  }
+
+  if (endpoint === 'saldo' && !numero_cuenta) {
+    responseDiv.className = 'warning';
+    responseDiv.innerHTML = 'Advertencia: debe ingresar un número de cuenta';
+    return;
+  }
+
+  const jsonString = JSON.stringify(jsonData);
+
+  try {
+    const response = await fetch(`${prod}${endpoint}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      },
+      body: jsonString
+    });
+
+    const data = await response.json();
+
+    // Restablecer clase y limpiar contenido anterior
+    responseDiv.className = 'response';
+    responseDiv.innerHTML = '';
+
+    if (response.ok) {
+      if (endpoint === 'cuentas') {
+        responseDiv.innerHTML = getTablaCuentas(data);
+      } else if (endpoint === 'saldo') {
+        responseDiv.innerHTML = getTablaSaldo(data, numero_cuenta);
       }
-    } catch (error) {
-      const responseDiv = document.getElementById('responseCuentas'); // Asegúrate de seleccionar el mismo div
-      responseDiv.className = 'error'; // Aplicar la clase de error
-      responseDiv.innerHTML = `Error: ${error.message}`; // Mostrar mensaje de error
-    }    
-};
+    } else {
+      responseDiv.className = 'error';
+      responseDiv.innerHTML = `Error: ${data.detail || 'Error desconocido'}`;
+    }
+  } catch (error) {
+    responseDiv.className = 'error';
+    responseDiv.innerHTML = `Error: ${error.message}`;
+  }
+}
 
-function getTablaDatosUsuario(data){
+function getTablaDatosUsuario(data) {
   let table = '<table class="my-custom-table"><thead><tr><th>Clave</th><th>Valor</th></tr></thead><tbody>';
-          
-    // Mostrar claves principales
-    for (let key in data) {
-        if (key !== 'tarjetas') {
-            table += `<tr><td>${key}</td><td>${data[key]}</td></tr>`;
-        }
-    }
-    // Mostrar tarjetas si existen
-    if (data.tarjetas && Array.isArray(data.tarjetas)) {
-        data.tarjetas.forEach((tarjeta, index) => {
-            table += `<tr><td>Tarjeta ${index + 1} - Descripción</td><td>${tarjeta.descripcion}</td></tr>`;
-            table += `<tr><td>Tarjeta ${index + 1} - Número</td><td>${tarjeta.numero}</td></tr>`;
-        });
-    }
-  
-    table += '</tbody></table>'
-    return table
-}  
 
-function getTablaCuentas(data){
-  let table = '<table class="my-custom-table"><thead><tr><th>Clave</th><th>Valor</th></tr></thead><tbody>';
-          
-    // Mostrar claves principales
-    for (let key in data) {
-        if (key !== 'cuentas') {
-            table += `<tr><td>${key}</td><td>${data[key]}</td></tr>`;
-        }
+  // Mostrar claves principales
+  for (let key in data) {
+    if (key !== 'tarjetas') {
+      table += `<tr><td>${key}</td><td>${data[key]}</td></tr>`;
     }
-    // Mostrar cuentas si existen
-    if (data.cuentas && Array.isArray(data.cuentas)) {
-        data.cuentas.forEach((cuentas, index) => {
-            table += `<tr><td>Cuenta ${index + 1} - Número</td><td>${cuentas.numero_cuenta}</td></tr>`;
-            table += `<tr><td>Cuenta ${index + 1} - Tipo</td><td>${cuentas.tipo}</td></tr>`;
-        });
-    }  
-    table += '</tbody></table>'
-    return table
+  }
+
+  // Mostrar tarjetas si existen
+  if (data.tarjetas && Array.isArray(data.tarjetas)) {
+    data.tarjetas.forEach((tarjeta, index) => {
+      table += `<tr><td>Tarjeta ${index + 1} - Descripción</td><td>${tarjeta.descripcion}</td></tr>`;
+      table += `<tr><td>Tarjeta ${index + 1} - Número</td><td>${tarjeta.numero}</td></tr>`;
+    });
+  }
+
+  table += '</tbody></table>';
+  return table;
+}
+
+function getTablaCuentas(data) {
+  let table = '<table class="my-custom-table"><thead><tr><th>Clave</th><th>Valor</th></tr></thead><tbody>';
+
+  // Mostrar claves principales
+  for (let key in data) {
+    if (key !== 'cuentas') {
+      table += `<tr><td>${key}</td><td>${data[key]}</td></tr>`;
+    }
+  }
+
+  // Mostrar cuentas si existen
+  if (data.cuentas && Array.isArray(data.cuentas)) {
+    data.cuentas.forEach((cuenta, index) => {
+      table += `<tr><td>Cuenta ${index + 1} - Número</td><td>${cuenta.numero_cuenta}</td></tr>`;
+      table += `<tr><td>Cuenta ${index + 1} - Tipo</td><td>${cuenta.tipo}</td></tr>`;
+    });
+  }
+
+  table += '</tbody></table>';
+  return table;
+}
+
+function getTablaSaldo(data, numero_cuenta) {
+  let table = '<table class="my-custom-table"><thead><tr><th>Clave</th><th>Valor</th></tr></thead><tbody>';
+
+  table += `<tr><td>Número de cuenta</td><td>${numero_cuenta}</td></tr>`;
+  table += `<tr><td>Saldo</td><td>${data.saldo}</td></tr>`;
+
+  table += '</tbody></table>';
+  return table;
 }
