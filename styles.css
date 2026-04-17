@@ -327,3 +327,8 @@ table tr:hover {
   gap: 12px;
   align-items: center;
 }
+
+body {
+  background-color: #f4f6f9;
+  font-family: Arial, sans-serif;
+}
