@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página de Acceso a la API</title>
+  <title>Wallet Challenge - Home Banking</title>
 
   <link rel="stylesheet" href="styles.css">
   <script src="cuentas.js"></script>
 </head>
 <body>
-  <h1>Wallet Challenge</h1>
-  <p>¡Bienvenido! Ha iniciado sesión correctamente.</p>
 
-  <div class="header">
-  <div class="logo">🏦 Wallet</div>
-  <div class="user-info">
-    <span>Usuario: challenge</span>
-    <button onclick="callApi('endpoint6')">Salir</button>
-  </div>
-</div>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="app-header__brand">🏦 Wallet Challenge</div>
+  </header>
+
+  <!-- Encabezado principal -->
+  <h1 class="home-title">Wallet Challenge</h1>
+  <p class="home-subtitle">¡Bienvenido! Ha iniciado sesión correctamente.</p>
+
   <!-- Panel superior -->
   <div class="top-panel">
 
@@ -57,10 +57,18 @@
     </div>
 
     <div class="secondary-actions">
-      <button onclick="callApi('endpoint3')" data-testid="movimientos-button">Movimientos</button>
-      <button onclick="callApi('endpoint4')" data-testid="pago-button">Pago</button>
-      <button onclick="callApi('endpoint5')" data-testid="estado-button">Estado</button>
-      <button onclick="callApi('endpoint6')" data-testid="salir-button">Salir</button>
+      <button onclick="callApi('endpoint3')" data-testid="movimientos-button" disabled>
+        Movimientos
+      </button>
+      <button onclick="callApi('endpoint4')" data-testid="pago-button" disabled>
+        Pago
+      </button>
+      <button onclick="callApi('endpoint5')" data-testid="estado-button" disabled>
+        Estado
+      </button>
+      <button onclick="callApi('endpoint6')" data-testid="salir-button">
+        Salir
+      </button>
     </div>
 
   </div>
@@ -123,15 +131,18 @@
       }
     }
 
-const rawData = localStorage.getItem('DatosUsuario');
-if (rawData) {
-  const data = JSON.parse(rawData);
-  document.getElementById('responseUsuario').innerHTML = getTablaDatosUsuario(data);
-}
+    const rawData = localStorage.getItem('DatosUsuario');
+    if (rawData) {
+      const data = JSON.parse(rawData);
+      document.getElementById('responseUsuario').innerHTML = getTablaDatosUsuario(data);
+    }
+
     // Estado inicial
     openSection("usuario");
     closeSection("cuentas");
     closeSection("saldo");
   </script>
+
 </body>
 </html>
+
