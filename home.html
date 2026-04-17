@@ -5,22 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Página de Acceso a la API</title>
 
-  <!-- Enlace al nuevo archivo de estilos unificado -->
   <link rel="stylesheet" href="styles.css">
-  
-  <!-- Archivo de JavaScript -->
   <script src="cuentas.js"></script>
 </head>
 <body>
-  <!-- Encabezado principal -->
   <h1>Wallet Challenge</h1>
   <p>¡Bienvenido! Ha iniciado sesión correctamente.</p>
 
-  <!-- Controles interactivos -->
   <div class="buttons-container">
     <button onclick="callApi('cuentas')" data-testid="cuentas-button">Cuentas</button>
-    <input type="text" id="tarjeta"  data-testid="tarjeta-input" placeholder="Ingrese número de tarjeta" value="">
-    <input type="text" id="cuenta"  data-testid="cuenta-input" placeholder="Ingrese número de cuenta" value="">
+    <input type="text" id="tarjeta" data-testid="tarjeta-input" placeholder="Ingrese número de tarjeta" value="">
+    <input type="text" id="cuenta" data-testid="cuenta-input" placeholder="Ingrese número de cuenta" value="">
     <button onclick="callApi('saldo')" data-testid="saldo-button">Saldo</button>
     <button onclick="callApi('endpoint3')">Movimientos</button>
     <button onclick="callApi('endpoint4')">Pago</button>
@@ -28,23 +23,71 @@
     <button onclick="callApi('endpoint6')">Salir</button>
   </div>
 
-  <!-- Respuesta del API -->
-<h3>Datos del usuario</h3>
-<div id="responseUsuario" class="response" data-testid="response-usuario"></div>
+  <!-- Sección usuario -->
+  <h3 class="section-title"
+      onclick="toggleSection('usuario')"
+      data-testid="toggle-usuario">
+    ▶ Datos del usuario
+  </h3>
+  <div id="section-usuario" class="section-content" data-testid="section-usuario">
+    <div id="responseUsuario" class="response" data-testid="response-usuario"></div>
+  </div>
 
-<h3>Cuentas</h3>
-<div id="responseCuentas" class="response" data-testid="response-cuentas"></div>
+  <!-- Sección cuentas -->
+  <h3 class="section-title"
+      onclick="toggleSection('cuentas')"
+      data-testid="toggle-cuentas">
+    ▶ Cuentas
+  </h3>
+  <div id="section-cuentas" class="section-content" data-testid="section-cuentas">
+    <div id="responseCuentas" class="response" data-testid="response-cuentas"></div>
+  </div>
 
-<h3>Saldo</h3>
-<div id="responseSaldo" class="response" data-testid="response-saldo"></div>
+  <!-- Sección saldo -->
+  <h3 class="section-title"
+      onclick="toggleSection('saldo')"
+      data-testid="toggle-saldo">
+    ▶ Saldo
+  </h3>
+  <div id="section-saldo" class="section-content" data-testid="section-saldo">
+    <div id="responseSaldo" class="response" data-testid="response-saldo"></div>
+  </div>
 
+  <script>
+    function toggleSection(section) {
+      const container = document.getElementById(`section-${section}`);
+      const title = document.querySelector(`[data-testid="toggle-${section}"]`);
 
+      if (container.style.display === "none") {
+        container.style.display = "block";
+        title.textContent = `▼ ${getSectionTitle(section)}`;
+      } else {
+        container.style.display = "none";
+        title.textContent = `▶ ${getSectionTitle(section)}`;
+      }
+    }
+
+    function getSectionTitle(section) {
+      if (section === "usuario") return "Datos del usuario";
+      if (section === "cuentas") return "Cuentas";
+      if (section === "saldo") return "Saldo";
+      return section;
+    }
+
+    const data = JSON.parse(localStorage.getItem('DatosUsuario'));
+    if (data) {
+      responseUsuario.innerHTML = getTablaDatosUsuario(data);
+    }
+
+    // Estado inicial de secciones
+    document.getElementById("section-usuario").style.display = "block";
+    document.querySelector('[data-testid="toggle-usuario"]').textContent = "▼ Datos del usuario";
+
+    document.getElementById("section-cuentas").style.display = "none";
+    document.querySelector('[data-testid="toggle-cuentas"]').textContent = "▶ Cuentas";
+
+    document.getElementById("section-saldo").style.display = "none";
+    document.querySelector('[data-testid="toggle-saldo"]').textContent = "▶ Saldo";
+  </script>
 </body>
-<script>
- 
-  const data = JSON.parse(localStorage.getItem('DatosUsuario'));
-
-  responseUsuario.innerHTML = getTablaDatosUsuario(data);
-
-</script>
 </html>
