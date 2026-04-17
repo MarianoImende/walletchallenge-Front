@@ -196,7 +196,7 @@ table tr:hover {
   background-color: #0056b3;
 }
 
-.section-title {
+.section-titlee {
   cursor: pointer;
   background-color: #f0f0f0;
   padding: 12px 16px;
@@ -211,6 +211,11 @@ table tr:hover {
   box-sizing: border-box;
 }
 
+.section-title {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+  font-weight: 600;
+}
 .section-title:hover {
   background-color: #e4e4e4;
 }
