@@ -257,15 +257,15 @@ button:disabled {
   padding: 10px 12px;
 }
 
-.success_old {
+.success {
   color: #0f5132;
   background-color: #d1e7dd;
   border: 1px solid #badbcc;
-  text-align: left;
+  text-align: center;
   border-radius: 6px;
   padding: 10px 12px;
 }
-.success {
+.success_old {
   color: #155724;
   background-color: #d4edda;
   border-color: #c3e6cb;
