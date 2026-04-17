@@ -20,7 +20,8 @@
   <div class="buttons-container">
     <button onclick="callApi('cuentas')">Cuentas</button>
     <input type="text" id="tarjeta" placeholder="Ingrese número de tarjeta" value="">
-    <button onclick="callApi('endpoint2')">Saldo</button>
+    <input type="text" id="cuenta" placeholder="Ingrese número de cuenta" value="">
+    <button onclick="callApi('Saldo')">Saldo</button>
     <button onclick="callApi('endpoint3')">Movimientos</button>
     <button onclick="callApi('endpoint4')">Pago</button>
     <button onclick="callApi('endpoint5')">Estado</button>
@@ -29,7 +30,9 @@
 
   <!-- Respuesta del API -->
   <div id="responseCuentas" class="response"></div>
+  <div id="responseSaldo" class="response"></div>
   <div id="responseUsuario" class="response"></div>
+
 
 </body>
 <script>
