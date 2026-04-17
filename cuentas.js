@@ -78,7 +78,7 @@ function getTablaDatosUsuario(data) {
 
   // Mostrar claves principales
   for (let key in data) {
-    if (key !== 'tarjetas') {
+    if (key !== 'tarjetas' && key !== 'access_token') {
       table += `<tr><td>${key}</td><td>${data[key]}</td></tr>`;
     }
   }
