@@ -406,6 +406,74 @@ table {
 }
 
 /* =========================
+   Cards de cuentas
+   ========================= */
+.cuentas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.cuenta-card {
+  background: #ffffff;
+  border: 1px solid #d8e1ea;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  text-align: left;
+}
+
+.cuenta-card-header {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0d47a1;
+  margin-bottom: 10px;
+}
+
+.cuenta-tipo {
+  font-size: 0.95rem;
+  color: #2e7d32;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.cuenta-numero {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* =========================
+   Card de saldo
+   ========================= */
+.saldo-card {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  border: 1px solid #d8e1ea;
+}
+
+.saldo-card h3 {
+  margin: 0 0 10px 0;
+  color: #0d47a1;
+  font-size: 1.3rem;
+}
+
+.saldo-cuenta {
+  margin-bottom: 12px;
+  color: #666;
+  font-size: 1rem;
+}
+
+.saldo-card p {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2e7d32;
+}
+/* =========================
    Tarjeta especial de saldo
    ========================= */
 .saldo-card {
