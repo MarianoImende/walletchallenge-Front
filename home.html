@@ -26,13 +26,15 @@
       <div class="operation-group">
         <div class="field-block">
           <label for="tarjeta">Tarjeta</label>
-          <input
-            type="text"
-            id="tarjeta"
-            data-testid="tarjeta-input"
-            placeholder="Ingrese número de tarjeta"
-            value=""
-          >
+<select
+  id="tarjeta"
+  data-testid="tarjeta-select"
+>
+  <option value="">Seleccionar tarjeta</option>
+  <option value="825840853443">825840853443</option>
+  <option value="423455721156">423455721156</option>
+  <option value="595278769781">595278769781</option>
+</select>
         </div>
         <button onclick="callApi('cuentas')" data-testid="cuentas-button">
           Consultar cuentas
