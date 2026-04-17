@@ -237,12 +237,12 @@ table tr:hover {
 
 .operation-group {
   display: flex;
-  align-items: flex-end;
-  gap: 12px;
+  flex-direction: column;   /* 👈 ESTE CAMBIO ES CLAVE */
+  gap: 10px;
   background: #efefef;
-  padding: 14px 16px;
+  padding: 16px;
   border-radius: 8px;
-  box-sizing: border-box;
+  min-width: 320px;
 }
 
 .field-block {
