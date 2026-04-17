@@ -18,10 +18,10 @@
 
   <!-- Controles interactivos -->
   <div class="buttons-container">
-    <button onclick="callApi('cuentas')">Cuentas</button>
-    <input type="text" id="tarjeta" placeholder="Ingrese número de tarjeta" value="">
-    <input type="text" id="cuenta" placeholder="Ingrese número de cuenta" value="">
-    <button onclick="callApi('Saldo')">Saldo</button>
+    <button onclick="callApi('cuentas')" data-testid="cuentas-button">Cuentas</button>
+    <input type="text" id="tarjeta"  data-testid="tarjeta-input" placeholder="Ingrese número de tarjeta" value="">
+    <input type="text" id="cuenta"  data-testid="cuenta-input" placeholder="Ingrese número de cuenta" value="">
+    <button onclick="callApi('saldo')" data-testid="saldo-button">Saldo</button>
     <button onclick="callApi('endpoint3')">Movimientos</button>
     <button onclick="callApi('endpoint4')">Pago</button>
     <button onclick="callApi('endpoint5')">Estado</button>
@@ -29,9 +29,9 @@
   </div>
 
   <!-- Respuesta del API -->
-  <div id="responseCuentas" class="response"></div>
-  <div id="responseSaldo" class="response"></div>
-  <div id="responseUsuario" class="response"></div>
+  <div id="responseCuentas" data-testid="response-cuentas" class="response"></div>
+  <div id="responseSaldo" data-testid="response-saldo" class="response"></div>
+  <div id="responseUsuario" data-testid="response-Usuario" class="response"></div>
 
 
 </body>
