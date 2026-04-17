@@ -446,6 +446,7 @@ table {
 /* =========================
    Card de saldo
    ========================= */
+/*
 .saldo-card {
   background: #ffffff;
   padding: 24px;
@@ -453,6 +454,15 @@ table {
   text-align: center;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
   border: 1px solid #d8e1ea;
+}*/
+.saldo-card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  border: 1px solid #d8e1ea;
+  min-width: 220px;
 }
 
 .saldo-card h3 {
@@ -554,4 +564,19 @@ table {
   .login-card {
     max-width: 100%;
   }
+}
+
+.cuenta-saldo-wrapper {
+  display: flex;
+  gap: 16px;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+/* =========================
+   card saldo
+   ========================= */
+.saldo-inline {
+  display: flex;
+  align-items: center;
 }
