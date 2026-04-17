@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login de Sesión</title>
+    <title>Ingreso al Home Banking</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
 
-    <!-- Encabezado tipo home banking -->
+    <!-- Header -->
     <header class="app-header">
         <div class="app-header__brand">🏦 Wallet Challenge</div>
     </header>
 
+    <!-- Mensaje de seguridad -->
     <p class="login-security">🔒 Conexión segura - Tus datos están protegidos</p>
-    
+
+    <!-- Contenido principal -->
     <main class="login-page">
         <section class="login-card">
             <h1 class="login-title">Ingreso al Home Banking</h1>
@@ -30,6 +32,7 @@
                     required
                     data-testid="username-input"
                     autocomplete="username"
+                    placeholder="Ingresá tu usuario"
                 >
 
                 <label for="password">Contraseña</label>
@@ -40,18 +43,21 @@
                     required
                     data-testid="password-input"
                     autocomplete="current-password"
+                    placeholder="Ingresá tu contraseña"
                 >
 
                 <button type="submit" data-testid="login-button">Iniciar Sesión</button>
             </form>
 
-            <div id="response" class="response login-response" data-testid="login-response">
+            <div id="response" class="login-response" data-testid="login-response">
                 <div id="success-message" class="success" style="display: none;" data-testid="success-message">
                     ✔ Inicio de sesión exitoso
                 </div>
+
                 <div id="error-message" class="error" style="display: none;" data-testid="error-message">
                     ✘ Error de autenticación
                 </div>
+
                 <div id="warning-message" class="warning" style="display: none;" data-testid="warning-message">
                     ⚠ Advertencia
                 </div>
