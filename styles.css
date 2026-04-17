@@ -257,7 +257,7 @@ button:disabled {
   padding: 10px 12px;
 }
 
-.success {
+.success_old {
   color: #0f5132;
   background-color: #d1e7dd;
   border: 1px solid #badbcc;
@@ -265,7 +265,11 @@ button:disabled {
   border-radius: 6px;
   padding: 10px 12px;
 }
-
+.success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
 .warning {
   color: #8a6d3b;
   background-color: #fff3cd;
