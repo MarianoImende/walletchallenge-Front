@@ -12,29 +12,62 @@
   <h1>Wallet Challenge</h1>
   <p>¡Bienvenido! Ha iniciado sesión correctamente.</p>
 
-  <div class="buttons-container">
-    <button onclick="callApi('cuentas')" data-testid="cuentas-button">Cuentas</button>
-    <input type="text" id="tarjeta" data-testid="tarjeta-input" placeholder="Ingrese número de tarjeta" value="">
-    <input type="text" id="cuenta" data-testid="cuenta-input" placeholder="Ingrese número de cuenta" value="">
-    <button onclick="callApi('saldo')" data-testid="saldo-button">Saldo</button>
-    <button onclick="callApi('endpoint3')">Movimientos</button>
-    <button onclick="callApi('endpoint4')">Pago</button>
-    <button onclick="callApi('endpoint5')">Estado</button>
-    <button onclick="callApi('endpoint6')">Salir</button>
+  <!-- Panel superior -->
+  <div class="top-panel">
+
+    <div class="operation-row">
+      <div class="operation-group">
+        <div class="field-block">
+          <label for="tarjeta">Tarjeta</label>
+          <input
+            type="text"
+            id="tarjeta"
+            data-testid="tarjeta-input"
+            placeholder="Ingrese número de tarjeta"
+            value=""
+          >
+        </div>
+        <button onclick="callApi('cuentas')" data-testid="cuentas-button">
+          Consultar cuentas
+        </button>
+      </div>
+
+      <div class="operation-group">
+        <div class="field-block">
+          <label for="cuenta">Cuenta</label>
+          <input
+            type="text"
+            id="cuenta"
+            data-testid="cuenta-input"
+            placeholder="Ingrese número de cuenta"
+            value=""
+          >
+        </div>
+        <button onclick="callApi('saldo')" data-testid="saldo-button">
+          Consultar saldo
+        </button>
+      </div>
+    </div>
+
+    <div class="secondary-actions">
+      <button onclick="callApi('endpoint3')" data-testid="movimientos-button">Movimientos</button>
+      <button onclick="callApi('endpoint4')" data-testid="pago-button">Pago</button>
+      <button onclick="callApi('endpoint5')" data-testid="estado-button">Estado</button>
+      <button onclick="callApi('endpoint6')" data-testid="salir-button">Salir</button>
+    </div>
+
   </div>
 
   <!-- Sección usuario -->
-<h3 class="section-title" onclick="toggleSection('usuario')" data-testid="toggle-usuario">
-  ▶ Datos del usuario
-</h3>
-<div id="section-usuario" class="section-content" data-testid="section-usuario">
-  <div id="responseUsuario" class="response" data-testid="response-usuario"></div>
-</div>
+  <h3 class="section-title" onclick="toggleSection('usuario')" data-testid="toggle-usuario">
+    ▶ Datos del usuario
+  </h3>
+  <div id="section-usuario" class="section-content" data-testid="section-usuario">
+    <div id="responseUsuario" class="response" data-testid="response-usuario"></div>
+  </div>
 
   <!-- Sección cuentas -->
-  <h3 class="section-title"
-      onclick="toggleSection('cuentas')"
-      data-testid="toggle-cuentas">
+  <h3 class="section-title" onclick="toggleSection('cuentas')" data-testid="toggle-cuentas">
     ▶ Cuentas
   </h3>
   <div id="section-cuentas" class="section-content" data-testid="section-cuentas">
@@ -42,9 +75,7 @@
   </div>
 
   <!-- Sección saldo -->
-  <h3 class="section-title"
-      onclick="toggleSection('saldo')"
-      data-testid="toggle-saldo">
+  <h3 class="section-title" onclick="toggleSection('saldo')" data-testid="toggle-saldo">
     ▶ Saldo
   </h3>
   <div id="section-saldo" class="section-content" data-testid="section-saldo">
@@ -52,19 +83,6 @@
   </div>
 
   <script>
-    function toggleSection(section) {
-      const container = document.getElementById(`section-${section}`);
-      const title = document.querySelector(`[data-testid="toggle-${section}"]`);
-
-      if (container.style.display === "none") {
-        container.style.display = "block";
-        title.textContent = `▼ ${getSectionTitle(section)}`;
-      } else {
-        container.style.display = "none";
-        title.textContent = `▶ ${getSectionTitle(section)}`;
-      }
-    }
-
     function getSectionTitle(section) {
       if (section === "usuario") return "Datos del usuario";
       if (section === "cuentas") return "Cuentas";
@@ -72,20 +90,41 @@
       return section;
     }
 
-    const data = JSON.parse(localStorage.getItem('DatosUsuario'));
-    if (data) {
-      responseUsuario.innerHTML = getTablaDatosUsuario(data);
+    function openSection(section) {
+      const container = document.getElementById(`section-${section}`);
+      const title = document.querySelector(`[data-testid="toggle-${section}"]`);
+
+      container.style.display = "block";
+      title.textContent = `▼ ${getSectionTitle(section)}`;
     }
 
-    // Estado inicial de secciones
-    document.getElementById("section-usuario").style.display = "block";
-    document.querySelector('[data-testid="toggle-usuario"]').textContent = "▼ Datos del usuario";
+    function closeSection(section) {
+      const container = document.getElementById(`section-${section}`);
+      const title = document.querySelector(`[data-testid="toggle-${section}"]`);
 
-    document.getElementById("section-cuentas").style.display = "none";
-    document.querySelector('[data-testid="toggle-cuentas"]').textContent = "▶ Cuentas";
+      container.style.display = "none";
+      title.textContent = `▶ ${getSectionTitle(section)}`;
+    }
 
-    document.getElementById("section-saldo").style.display = "none";
-    document.querySelector('[data-testid="toggle-saldo"]').textContent = "▶ Saldo";
+    function toggleSection(section) {
+      const container = document.getElementById(`section-${section}`);
+
+      if (container.style.display === "none") {
+        openSection(section);
+      } else {
+        closeSection(section);
+      }
+    }
+
+    const data = JSON.parse(localStorage.getItem('DatosUsuario'));
+    if (data) {
+      document.getElementById('responseUsuario').innerHTML = getTablaDatosUsuario(data);
+    }
+
+    // Estado inicial
+    openSection("usuario");
+    closeSection("cuentas");
+    closeSection("saldo");
   </script>
 </body>
 </html>
