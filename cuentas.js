@@ -223,33 +223,39 @@ function getTablaSaldo(data, numero_cuenta) {
 async function logout() {
   const token = localStorage.getItem('token');
 
+  if (!token) {
+    window.location.href = 'index.html';
+    return;
+  }
+
   try {
     const response = await fetch('https://walletchallenge-back.onrender.com/wallet/logout', {
       method: 'DELETE',
       headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`
       }
     });
 
-    if (response.ok) {
-      console.log("Logout exitoso");
+    let data = {};
+    const contentType = response.headers.get('content-type') || '';
 
-      // 🔥 Limpieza total
+    if (contentType.includes('application/json')) {
+      data = await response.json();
+    }
+
+    if (response.ok) {
+      console.log(data[" message"] || 'Has cerrado sesión exitosamente');
+
       localStorage.removeItem('token');
       localStorage.removeItem('DatosUsuario');
 
-      // 🚀 Redirección
       window.location.href = 'index.html';
     } else {
-      const data = await response.json();
-      console.error("Error en logout:", data);
-
-      alert("Error al cerrar sesión");
+      alert(`Error al cerrar sesión: ${data.detail || 'Error desconocido'}`);
     }
 
   } catch (error) {
-    console.error("Error técnico:", error);
-    alert("Error de conexión en logout");
+    alert(`Error de red al cerrar sesión: ${error.message}`);
   }
 }
