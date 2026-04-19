@@ -580,3 +580,12 @@ table {
   display: flex;
   align-items: center;
 }
+
+#responseCuentas {
+  flex: 2;
+}
+
+#saldoInline {
+  flex: 1;
+  min-width: 250px;
+}
