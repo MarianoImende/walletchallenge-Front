@@ -1,4 +1,14 @@
 // Función de ejemplo para llamadas a la API
+
+async function consultarSaldoDesdeCuenta(numeroCuenta) {
+  const cuentaInput = document.getElementById('cuenta');
+  if (cuentaInput) {
+    cuentaInput.value = numeroCuenta;
+  }
+
+  await callApi('saldo');
+}
+
 async function callApi(endpoint) {
   const numero_tarjeta = document.getElementById('tarjeta')?.value.trim() || '';
   const numero_cuenta = document.getElementById('cuenta')?.value.trim() || '';
@@ -108,7 +118,37 @@ function getTablaDatosUsuario(data) {
   table += '</tbody></table>';
   return table;
 }
+function getTablaCuentas(data) {
+  let html = '<div class="cuentas-grid">';
 
+  if (data.cuentas && Array.isArray(data.cuentas)) {
+    data.cuentas.forEach((cuenta, index) => {
+      html += `
+        <div class="cuenta-card">
+          <div class="cuenta-card-header">Cuenta ${index + 1}</div>
+          <div class="cuenta-tipo">${cuenta.tipo}</div>
+          <div class="cuenta-numero">${cuenta.numero_cuenta}</div>
+          <button 
+            class="cuenta-action-button"
+            onclick="consultarSaldoDesdeCuenta('${cuenta.numero_cuenta}')"
+            data-testid="saldo-cuenta-${index + 1}">
+            Ver saldo
+          </button>
+        </div>
+      `;
+    });
+  } else {
+    html += `
+      <div class="warning">
+        No se encontraron cuentas para la tarjeta seleccionada.
+      </div>
+    `;
+  }
+
+  html += '</div>';
+  return html;
+}
+/*
 function getTablaCuentas(data) {
   let html = '<div class="cuentas-grid">';
 
@@ -133,6 +173,7 @@ function getTablaCuentas(data) {
   html += '</div>';
   return html;
 }
+*/
 
 /*
 function getTablaCuentas(data) {
