@@ -43,7 +43,7 @@
         </button>
       </div>
 
-      <div class="cuenta-saldo-wrapper">
+    <div class="cuenta-saldo-wrapper">
       <div class="operation-group">
         <div class="field-block">
           <label for="cuenta">Cuenta</label>
@@ -60,9 +60,24 @@
         </button>
       </div>
           <!-- NUEVO: contenedor del saldo -->
-
     </div>
 
+  <div class="operation-group qa-panel">
+   <div class="field-block">
+     <label for="cuenta">Cuenta (modo testing)</label>
+     <input
+       type="text"
+       id="cuenta"
+       data-testid="cuenta-input"
+       placeholder="Ej: 99083422"
+     >
+   </div>
+   <button onclick="callApi('saldo')" data-testid="saldo-button">
+    Consultar saldo (manual)
+  </button>
+ </div>
+
+      
     <div class="secondary-actions">
       <button onclick="callApi('endpoint3')" data-testid="movimientos-button" disabled>
         Movimientos
