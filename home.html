@@ -98,51 +98,49 @@
   </div>
 
 
-  <script>
-    function getSectionTitle(section) {
-      if (section === "usuario") return "Datos del usuario";
-      if (section === "cuentas") return "Cuentas";
-      if (section === "saldo") return "Saldo";
-      return section;
+<script>
+  function getSectionTitle(section) {
+    if (section === "usuario") return "Datos del usuario";
+    if (section === "cuentas") return "Cuentas";
+    return section;
+  }
+
+  function openSection(section) {
+    const container = document.getElementById(`section-${section}`);
+    const title = document.querySelector(`[data-testid="toggle-${section}"]`);
+
+    container.style.display = "block";
+    title.textContent = `▼ ${getSectionTitle(section)}`;
+  }
+
+  function closeSection(section) {
+    const container = document.getElementById(`section-${section}`);
+    const title = document.querySelector(`[data-testid="toggle-${section}"]`);
+
+    container.style.display = "none";
+    title.textContent = `▶ ${getSectionTitle(section)}`;
+  }
+
+  function toggleSection(section) {
+    const container = document.getElementById(`section-${section}`);
+
+    if (container.style.display === "none") {
+      openSection(section);
+    } else {
+      closeSection(section);
     }
+  }
 
-    function openSection(section) {
-      const container = document.getElementById(`section-${section}`);
-      const title = document.querySelector(`[data-testid="toggle-${section}"]`);
+  const rawData = localStorage.getItem('DatosUsuario');
+  if (rawData) {
+    const data = JSON.parse(rawData);
+    document.getElementById('responseUsuario').innerHTML = getTablaDatosUsuario(data);
+  }
 
-      container.style.display = "block";
-      title.textContent = `▼ ${getSectionTitle(section)}`;
-    }
-
-    function closeSection(section) {
-      const container = document.getElementById(`section-${section}`);
-      const title = document.querySelector(`[data-testid="toggle-${section}"]`);
-
-      container.style.display = "none";
-      title.textContent = `▶ ${getSectionTitle(section)}`;
-    }
-
-    function toggleSection(section) {
-      const container = document.getElementById(`section-${section}`);
-
-      if (container.style.display === "none") {
-        openSection(section);
-      } else {
-        closeSection(section);
-      }
-    }
-
-    const rawData = localStorage.getItem('DatosUsuario');
-    if (rawData) {
-      const data = JSON.parse(rawData);
-      document.getElementById('responseUsuario').innerHTML = getTablaDatosUsuario(data);
-    }
-
-    // Estado inicial
-    openSection("usuario");
-    closeSection("cuentas");
-    closeSection("saldo");
-  </script>
+  // Estado inicial
+  openSection("usuario");
+  closeSection("cuentas");
+</script>
 
 </body>
 </html>
