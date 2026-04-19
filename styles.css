@@ -600,3 +600,8 @@ table {
   width: 100%;
   font-weight: 600;
 }
+
+.qa-panel {
+  opacity: 0.7;
+  border: 1px dashed #ccc;
+}
