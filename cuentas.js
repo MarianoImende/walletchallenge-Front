@@ -24,11 +24,11 @@ async function callApi(endpoint) {
     jsonData = { numero_tarjeta: numero_tarjeta };
     responseDiv = document.getElementById('responseCuentas');
     sectionName = 'cuentas';
-  } else if (endpoint === 'saldo') {
-    jsonData = { numero_cuenta: numero_cuenta };
-    responseDiv = document.getElementById('saldoInline'); 
-    sectionName = 'saldo';
-  } else {
+} else if (endpoint === 'saldo') {
+  jsonData = { numero_cuenta: numero_cuenta };
+  responseDiv = document.getElementById('saldoInline');
+  sectionName = 'cuentas';
+} else {
     alert(`Endpoint no soportado todavía: ${endpoint}`);
     return;
   }
