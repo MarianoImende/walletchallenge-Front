@@ -589,3 +589,14 @@ table {
   flex: 1;
   min-width: 250px;
 }
+
+.cuenta-action-button {
+  margin-top: 14px;
+  width: 100%;
+}
+
+.cuenta-action-button {
+  margin-top: 14px;
+  width: 100%;
+  font-weight: 600;
+}
