@@ -124,6 +124,8 @@
     const container = document.getElementById(`section-${section}`);
     const title = document.querySelector(`[data-testid="toggle-${section}"]`);
 
+    if (!container || !title) return;
+
     container.style.display = "block";
     title.textContent = `▼ ${getSectionTitle(section)}`;
   }
@@ -132,12 +134,15 @@
     const container = document.getElementById(`section-${section}`);
     const title = document.querySelector(`[data-testid="toggle-${section}"]`);
 
+    if (!container || !title) return;
+
     container.style.display = "none";
     title.textContent = `▶ ${getSectionTitle(section)}`;
   }
 
   function toggleSection(section) {
     const container = document.getElementById(`section-${section}`);
+    if (!container) return;
 
     if (container.style.display === "none") {
       openSection(section);
@@ -152,7 +157,6 @@
     document.getElementById('responseUsuario').innerHTML = getTablaDatosUsuario(data);
   }
 
-  // Estado inicial
   openSection("usuario");
   closeSection("cuentas");
 </script>
