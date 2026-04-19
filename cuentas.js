@@ -219,3 +219,37 @@ function getTablaSaldo(data, numero_cuenta) {
     </div>
   `;
 }
+
+async function logout() {
+  const token = localStorage.getItem('token');
+
+  try {
+    const response = await fetch('https://walletchallenge-back.onrender.com/wallet/logout', {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json'
+      }
+    });
+
+    if (response.ok) {
+      console.log("Logout exitoso");
+
+      // 🔥 Limpieza total
+      localStorage.removeItem('token');
+      localStorage.removeItem('DatosUsuario');
+
+      // 🚀 Redirección
+      window.location.href = 'index.html';
+    } else {
+      const data = await response.json();
+      console.error("Error en logout:", data);
+
+      alert("Error al cerrar sesión");
+    }
+
+  } catch (error) {
+    console.error("Error técnico:", error);
+    alert("Error de conexión en logout");
+  }
+}
