@@ -646,3 +646,50 @@ table {
   justify-content: flex-start;
   align-items: flex-start;
 }
+
+.usuario-table-compacta {
+  width: auto;
+  min-width: 420px;
+  border-collapse: collapse;
+  background: #ffffff;
+  border: 1px solid #e3eaf2;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 0.92rem;
+}
+
+.usuario-table-compacta th,
+.usuario-table-compacta td {
+  padding: 8px 12px;
+  text-align: left;
+}
+
+/* Header más liviano */
+.usuario-table-compacta th {
+  background: #f4f8fc;
+  color: #0d47a1;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* Filas */
+.usuario-table-compacta td {
+  color: #333;
+  border-bottom: 1px solid #eef2f7;
+}
+
+/* Última fila sin borde */
+.usuario-table-compacta tr:last-child td {
+  border-bottom: none;
+}
+
+/* Hover suave */
+.usuario-table-compacta tbody tr:hover {
+  background: #f9fbfd;
+}
+
+/* Tarjetas más suaves visualmente */
+.tarjeta-row td:first-child {
+  color: #1565c0;
+  font-weight: 600;
+}
