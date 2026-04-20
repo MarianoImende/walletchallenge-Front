@@ -119,6 +119,7 @@ function getTablaDatosUsuario(data) {
     </table>
   `;
 }
+
 /*
 function getTablaDatosUsuario(data) {
   let table = '<table class="my-custom-table"><thead><tr><th>Clave</th><th>Valor</th></tr></thead><tbody>';
