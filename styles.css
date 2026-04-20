@@ -693,3 +693,27 @@ table {
   color: #1565c0;
   font-weight: 600;
 }
+
+.estado-badge {
+  margin-left: 10px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.estado-activa {
+  background-color: #e6f4ea;
+  color: #2e7d32;
+}
+
+.estado-pausada {
+  background-color: #fff3e0;
+  color: #ef6c00;
+}
+
+.estado-default {
+  background-color: #e3eaf2;
+  color: #555;
+}
