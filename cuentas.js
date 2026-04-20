@@ -98,28 +98,7 @@ async function callApi(endpoint) {
 }
 
 /*
-function getTablaDatosUsuario(data) {
-  let table = '<table class="my-custom-table"><thead><tr><th>Clave</th><th>Valor</th></tr></thead><tbody>';
 
-  // Mostrar claves principales
-  for (let key in data) {
-    if (key !== 'tarjetas' && key !== 'access_token'  && key !== 'access_token_expires'  && key !== 'token_type') {  
-      table += `<tr><td>${key}</td><td>${data[key]}</td></tr>`;
-    }
-  }
-
-  // Mostrar tarjetas si existen
-  if (data.tarjetas && Array.isArray(data.tarjetas)) {
-    data.tarjetas.forEach((tarjeta, index) => {
-      table += `<tr><td>Tarjeta ${index + 1} - Descripción</td><td>${tarjeta.descripcion}</td></tr>`;
-      table += `<tr><td>Tarjeta ${index + 1} - Número</td><td>${tarjeta.numero}</td></tr>`;
-    });
-  }
-
-  table += '</tbody></table>';
-  return table;
-}
-*/
 function getTablaDatosUsuario(data) {
   let table = `
     <table class="my-custom-table">
@@ -184,6 +163,54 @@ function getTablaCuentas(data) {
 
   html += '</div>';
   return html;
+}
+*/
+function getTablaDatosUsuario(data) {
+  let table = `
+    <table class="my-custom-table">
+      <thead>
+        <tr>
+          <th>Clave</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+
+  // Claves principales
+  for (let key in data) {
+    if (key !== 'tarjetas' && key !== 'access_token' && key !== 'access_token_expires' && key !== 'token_type') {
+      table += `<tr><td>${key}</td><td>${data[key]}</td></tr>`;
+    }
+  }
+
+  // Tarjetas (agrupadas mejor + estado)
+  if (data.tarjetas && Array.isArray(data.tarjetas)) {
+    data.tarjetas.forEach((tarjeta, index) => {
+      let estadoClass = 'estado-default';
+
+      if (tarjeta.estado?.toLowerCase() === 'activa') {
+        estadoClass = 'estado-activa';
+      } else if (tarjeta.estado?.toLowerCase() === 'pausada') {
+        estadoClass = 'estado-pausada';
+      }
+
+      table += `
+        <tr class="tarjeta-row">
+          <td>Tarjeta ${index + 1}</td>
+          <td>
+            ${tarjeta.descripcion} · ${tarjeta.numero}
+            <span class="estado-badge ${estadoClass}">
+              ${tarjeta.estado || 'Desconocido'}
+            </span>
+          </td>
+        </tr>
+      `;
+    });
+  }
+
+  table += '</tbody></table>';
+  return table;
 }
 /*
 function getTablaCuentas(data) {
