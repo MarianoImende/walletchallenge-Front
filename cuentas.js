@@ -97,7 +97,7 @@ async function callApi(endpoint) {
   }
 }
 
-
+/*
 function getTablaDatosUsuario(data) {
   let table = '<table class="my-custom-table"><thead><tr><th>Clave</th><th>Valor</th></tr></thead><tbody>';
 
@@ -113,6 +113,41 @@ function getTablaDatosUsuario(data) {
     data.tarjetas.forEach((tarjeta, index) => {
       table += `<tr><td>Tarjeta ${index + 1} - Descripción</td><td>${tarjeta.descripcion}</td></tr>`;
       table += `<tr><td>Tarjeta ${index + 1} - Número</td><td>${tarjeta.numero}</td></tr>`;
+    });
+  }
+
+  table += '</tbody></table>';
+  return table;
+}
+*/
+function getTablaDatosUsuario(data) {
+  let table = `
+    <table class="usuario-table-compacta">
+      <thead>
+        <tr>
+          <th>Clave</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+
+  // Claves principales
+  for (let key in data) {
+    if (key !== 'tarjetas' && key !== 'access_token' && key !== 'access_token_expires' && key !== 'token_type') {
+      table += `<tr><td>${key}</td><td>${data[key]}</td></tr>`;
+    }
+  }
+
+  // Tarjetas (agrupadas mejor)
+  if (data.tarjetas && Array.isArray(data.tarjetas)) {
+    data.tarjetas.forEach((tarjeta, index) => {
+      table += `
+        <tr class="tarjeta-row">
+          <td>Tarjeta ${index + 1}</td>
+          <td>${tarjeta.descripcion} · ${tarjeta.numero}</td>
+        </tr>
+      `;
     });
   }
 
