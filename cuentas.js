@@ -98,6 +98,27 @@ async function callApi(endpoint) {
 }
 
 function getTablaDatosUsuario(data) {
+  const cantidadTarjetas = Array.isArray(data.tarjetas) ? data.tarjetas.length : 0;
+
+  return `
+    <div class="usuario-resumen">
+      <div class="usuario-chip">
+        <span class="usuario-chip-label">Usuario</span>
+        <span class="usuario-chip-value">challenge</span>
+      </div>
+      <div class="usuario-chip">
+        <span class="usuario-chip-label">Tarjetas</span>
+        <span class="usuario-chip-value">${cantidadTarjetas}</span>
+      </div>
+      <div class="usuario-chip">
+        <span class="usuario-chip-label">Sesión</span>
+        <span class="usuario-chip-value">Activa</span>
+      </div>
+    </div>
+  `;
+}
+/*
+function getTablaDatosUsuario(data) {
   let table = '<table class="my-custom-table"><thead><tr><th>Clave</th><th>Valor</th></tr></thead><tbody>';
 
   // Mostrar claves principales
@@ -118,6 +139,7 @@ function getTablaDatosUsuario(data) {
   table += '</tbody></table>';
   return table;
 }
+*/
 function getTablaCuentas(data) {
   let html = '<div class="cuentas-grid">';
 
