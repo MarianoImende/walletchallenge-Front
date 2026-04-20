@@ -717,3 +717,8 @@ table {
   background-color: #e3eaf2;
   color: #555;
 }
+
+.my-custom-table td:last-child {
+  text-align: center;
+  width: 120px;
+}
