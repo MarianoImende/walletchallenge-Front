@@ -97,30 +97,7 @@ async function callApi(endpoint) {
   }
 }
 
-function getTablaDatosUsuario(data) {
-  const cantidadTarjetas = Array.isArray(data.tarjetas) ? data.tarjetas.length : 0;
 
-  return `
-    <table class="usuario-mini-table">
-      <thead>
-        <tr>
-          <th>Usuario</th>
-          <th>Tarjetas</th>
-          <th>Sesión</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>challenge</td>
-          <td>${cantidadTarjetas}</td>
-          <td>Activa</td>
-        </tr>
-      </tbody>
-    </table>
-  `;
-}
-
-/*
 function getTablaDatosUsuario(data) {
   let table = '<table class="my-custom-table"><thead><tr><th>Clave</th><th>Valor</th></tr></thead><tbody>';
 
@@ -142,7 +119,7 @@ function getTablaDatosUsuario(data) {
   table += '</tbody></table>';
   return table;
 }
-*/
+
 function getTablaCuentas(data) {
   let html = '<div class="cuentas-grid">';
 
