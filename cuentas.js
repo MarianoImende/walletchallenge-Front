@@ -133,7 +133,7 @@ function getTablaDatosUsuario(data) {
   table += '</tbody></table>';
   return table;
 }
-
+*/
 function getTablaCuentas(data) {
   let html = '<div class="cuentas-grid">';
 
@@ -164,7 +164,7 @@ function getTablaCuentas(data) {
   html += '</div>';
   return html;
 }
-*/
+
 function getTablaDatosUsuario(data) {
   let table = `
     <table class="my-custom-table">
@@ -218,6 +218,7 @@ function getTablaDatosUsuario(data) {
   return table;
 }
 
+/* v2
 function getTablaCuentas(data) {
   let html = '<div class="cuentas-grid">';
 
@@ -242,7 +243,7 @@ function getTablaCuentas(data) {
   html += '</div>';
   return html;
 }
-
+*/
 
 /* v1
 function getTablaCuentas(data) {
