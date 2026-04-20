@@ -101,20 +101,22 @@ function getTablaDatosUsuario(data) {
   const cantidadTarjetas = Array.isArray(data.tarjetas) ? data.tarjetas.length : 0;
 
   return `
-    <div class="usuario-resumen">
-      <div class="usuario-chip">
-        <span class="usuario-chip-label">Usuario</span>
-        <span class="usuario-chip-value">challenge</span>
-      </div>
-      <div class="usuario-chip">
-        <span class="usuario-chip-label">Tarjetas</span>
-        <span class="usuario-chip-value">${cantidadTarjetas}</span>
-      </div>
-      <div class="usuario-chip">
-        <span class="usuario-chip-label">Sesión</span>
-        <span class="usuario-chip-value">Activa</span>
-      </div>
-    </div>
+    <table class="usuario-mini-table">
+      <thead>
+        <tr>
+          <th>Usuario</th>
+          <th>Tarjetas</th>
+          <th>Sesión</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>challenge</td>
+          <td>${cantidadTarjetas}</td>
+          <td>Activa</td>
+        </tr>
+      </tbody>
+    </table>
   `;
 }
 /*
