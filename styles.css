@@ -605,3 +605,44 @@ table {
   opacity: 0.7;
   border: 1px dashed #ccc;
 }
+
+/* dddddddd 
+
+*/
+.usuario-mini-table {
+  width: auto;
+  min-width: 420px;
+  margin: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #ffffff;
+  border: 1px solid #d8e1ea;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.usuario-mini-table th,
+.usuario-mini-table td {
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.usuario-mini-table th {
+  background-color: #eef5fc;
+  color: #0d47a1;
+  font-weight: 700;
+}
+
+.usuario-mini-table td {
+  background: #ffffff;
+  color: #333;
+  font-weight: 600;
+}
+
+#responseUsuario {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
