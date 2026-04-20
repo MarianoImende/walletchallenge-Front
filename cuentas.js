@@ -172,6 +172,7 @@ function getTablaDatosUsuario(data) {
         <tr>
           <th>Clave</th>
           <th>Valor</th>
+          <th>Estado</th>
         </tr>
       </thead>
       <tbody>
@@ -180,7 +181,11 @@ function getTablaDatosUsuario(data) {
   // Claves principales
   for (let key in data) {
     if (key !== 'tarjetas' && key !== 'access_token' && key !== 'access_token_expires' && key !== 'token_type') {
-      table += `<tr><td>${key}</td><td>${data[key]}</td></tr>`;
+      table += `<tr>
+                  <td>${key}</td>
+                  <td>${data[key]}</td>
+                  <td>-</td>
+                </tr>`;
     }
   }
 
@@ -198,12 +203,12 @@ function getTablaDatosUsuario(data) {
       table += `
         <tr class="tarjeta-row">
           <td>Tarjeta ${index + 1}</td>
-          <td>
-            ${tarjeta.descripcion} · ${tarjeta.numero}
-            <span class="estado-badge ${estadoClass}">
-              ${tarjeta.estado || 'Desconocido'}
-            </span>
-          </td>
+            <td>${tarjeta.descripcion} · ${tarjeta.numero}</td>
+            <td>
+              <span class="estado-badge ${estadoClass}">
+                ${tarjeta.estado || 'Desconocido'}
+              </span>
+            </td>
         </tr>
       `;
     });
