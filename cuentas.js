@@ -122,7 +122,7 @@ function getTablaDatosUsuario(data) {
 */
 function getTablaDatosUsuario(data) {
   let table = `
-    <table class="usuario-table-compacta">
+    <table class="my-custom-table">
       <thead>
         <tr>
           <th>Clave</th>
