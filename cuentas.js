@@ -217,7 +217,7 @@ function getTablaDatosUsuario(data) {
   table += '</tbody></table>';
   return table;
 }
-/*
+
 function getTablaCuentas(data) {
   let html = '<div class="cuentas-grid">';
 
@@ -242,9 +242,9 @@ function getTablaCuentas(data) {
   html += '</div>';
   return html;
 }
-*/
 
 
+/* v1
 function getTablaCuentas(data) {
   let table = '<table class="my-custom-table"><thead><tr><th>Clave</th><th>Valor</th></tr></thead><tbody>';
 
@@ -266,7 +266,7 @@ function getTablaCuentas(data) {
   table += '</tbody></table>';
   return table;
 }
-
+*/
 
 /*
 function getTablaSaldo(data, numero_cuenta) {
