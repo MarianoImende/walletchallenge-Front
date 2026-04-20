@@ -605,3 +605,33 @@ table {
   opacity: 0.7;
   border: 1px dashed #ccc;
 }
+
+.usuario-resumen {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.usuario-chip {
+  background: #ffffff;
+  border: 1px solid #d8e1ea;
+  border-radius: 10px;
+  padding: 12px 16px;
+  min-width: 180px;
+  text-align: left;
+}
+
+.usuario-chip-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #0d47a1;
+  margin-bottom: 6px;
+}
+
+.usuario-chip-value {
+  font-size: 1rem;
+  color: #333;
+  font-weight: 600;
+}
