@@ -722,3 +722,6 @@ table {
   text-align: center;
   width: 120px;
 }
+.estado-badge {
+  display: inline-block;
+}
