@@ -315,7 +315,7 @@ async function logout() {
     }
 
     if (response.ok) {
-      console.log(data[" message"] || 'Has cerrado sesión exitosamente');
+      console.log(data["message"] || 'Has cerrado sesión exitosamente');
 
       localStorage.removeItem('token');
       localStorage.removeItem('DatosUsuario');
