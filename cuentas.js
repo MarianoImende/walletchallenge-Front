@@ -284,8 +284,8 @@ function getTablaSaldo(data, numero_cuenta) {
   return `
     <div class="saldo-card">
       <h3>Saldo disponible</h3>
-      <div class="saldo-cuenta">Cuenta ${numero_cuenta}</div>
-      <p>$ ${data.saldo}</p>
+      <div class="saldo-cuenta" data-testid="saldo-cuenta">Cuenta ${numero_cuenta}</div>
+      <p data-testid="saldo-monto">$ ${data.saldo}</p>
     </div>
   `;
 }
