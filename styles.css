@@ -732,3 +732,15 @@ table {
   font-weight: 700;
   color: #2e7d32;
 }
+
+.monto-positivo {
+  margin-top: 8px;
+  font-weight: 700;
+  color: #2e7d32; /* verde */
+}
+
+.monto-negativo {
+  margin-top: 8px;
+  font-weight: 700;
+  color: #c62828; /* rojo */
+}
