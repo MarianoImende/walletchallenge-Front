@@ -65,6 +65,9 @@
 
 <div class="operation-group">
   <div class="field-block">
+     <button onclick="callApi('movimientos')" data-testid="movimientos-button">
+        Movimientos
+      </button>
     <label for="fechaDesde">Fecha desde</label>
     <input
       type="text"
@@ -92,9 +95,7 @@
   <div class="operation-group qa-panel">
       
     <div class="secondary-actions">
-      <button onclick="callApi('movimientos')" data-testid="movimientos-button">
-        Movimientos
-      </button>
+
       <button onclick="callApi('endpoint4')" data-testid="pago-button" disabled>
         Pago
       </button>
