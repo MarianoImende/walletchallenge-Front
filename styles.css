@@ -604,6 +604,7 @@ table {
 .qa-panel {
   opacity: 0.7;
   border: 1px dashed #ccc;
+  justify-content: center;
 }
 
 /* dddddddd 
@@ -724,4 +725,10 @@ table {
 }
 .estado-badge {
   display: inline-block;
+}
+
+[data-testid^="movimiento-monto"] {
+  margin-top: 8px;
+  font-weight: 700;
+  color: #2e7d32;
 }
