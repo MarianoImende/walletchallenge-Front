@@ -162,27 +162,26 @@ function getTablaMovimientos(data) {
   let html = '<div class="cuentas-grid">';
 
   if (data.movimientos && Array.isArray(data.movimientos)) {
-    data.movimientos.forEach((movimiento, index) => {
+        data.movimientos.forEach((movimiento, index) => {
+      const monto = parseFloat(movimiento.monto);
+    
+      // Clase según signo
+      const claseMonto = monto >= 0 ? 'monto-positivo' : 'monto-negativo';
+    
+      // Signo visual
+      const simbolo = monto >= 0 ? '+' : '';
+    
       html += `
         <div class="cuenta-card" data-testid="movimiento-${index + 1}">
           <div class="cuenta-card-header">Movimiento ${index + 1}</div>
           <div data-testid="movimiento-fecha-${index + 1}">Fecha: ${movimiento.fecha}</div>
           <div data-testid="movimiento-descripcion-${index + 1}">${movimiento.descripcion}</div>
-          const monto = movimiento.monto;
-          const claseMonto = monto >= 0 ? 'monto-positivo' : 'monto-negativo';
           
-          html += `
-            <div class="cuenta-card" data-testid="movimiento-${index + 1}">
-              <div class="cuenta-card-header">Movimiento ${index + 1}</div>
-              <div data-testid="movimiento-fecha-${index + 1}">Fecha: ${movimiento.fecha}</div>
-              <div data-testid="movimiento-descripcion-${index + 1}">${movimiento.descripcion}</div>
-              <div 
-                class="${claseMonto}" 
-                data-testid="movimiento-monto-${index + 1}">
-                $ ${monto}
-              </div>
-            </div>
-          `;
+          <div 
+            class="${claseMonto}" 
+            data-testid="movimiento-monto-${index + 1}">
+            $ ${simbolo}${monto}
+          </div>
         </div>
       `;
     });
