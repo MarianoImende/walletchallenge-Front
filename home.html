@@ -101,11 +101,19 @@
     <div id="saldoInline" class="saldo-inline" data-testid="saldo-inline"></div>
   </div>
 
-
+    <h3 class="section-title" onclick="toggleSection('movimientos')" data-testid="toggle-movimientos">
+    ▶ Movimientos
+      </h3>
+      
+      <div id="section-movimientos" class="section-content" data-testid="section-movimientos">
+        <div id="responseMovimientos" class="response" data-testid="response-movimientos"></div>
+      </div>
+      
 <script>
   function getSectionTitle(section) {
     if (section === "usuario") return "Datos del usuario";
     if (section === "cuentas") return "Cuentas";
+    if (section === "movimientos") return "Movimientos";
     return section;
   }
 
@@ -148,6 +156,7 @@
 
   openSection("usuario");
   closeSection("cuentas");
+  closeSection("movimientos");
 </script>
 
 </body>
