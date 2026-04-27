@@ -168,7 +168,21 @@ function getTablaMovimientos(data) {
           <div class="cuenta-card-header">Movimiento ${index + 1}</div>
           <div data-testid="movimiento-fecha-${index + 1}">Fecha: ${movimiento.fecha}</div>
           <div data-testid="movimiento-descripcion-${index + 1}">${movimiento.descripcion}</div>
-          <div data-testid="movimiento-monto-${index + 1}">$ ${movimiento.monto}</div>
+          const monto = movimiento.monto;
+          const claseMonto = monto >= 0 ? 'monto-positivo' : 'monto-negativo';
+          
+          html += `
+            <div class="cuenta-card" data-testid="movimiento-${index + 1}">
+              <div class="cuenta-card-header">Movimiento ${index + 1}</div>
+              <div data-testid="movimiento-fecha-${index + 1}">Fecha: ${movimiento.fecha}</div>
+              <div data-testid="movimiento-descripcion-${index + 1}">${movimiento.descripcion}</div>
+              <div 
+                class="${claseMonto}" 
+                data-testid="movimiento-monto-${index + 1}">
+                $ ${monto}
+              </div>
+            </div>
+          `;
         </div>
       `;
     });
