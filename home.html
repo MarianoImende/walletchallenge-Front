@@ -62,10 +62,13 @@
           <!-- NUEVO: contenedor del saldo -->
     </div>
 
+  <input id="fechaDesde" data-testid="fecha-desde-input" value="">
+  <input id="fechaHasta" data-testid="fecha-hasta-input" value="">
+      
   <div class="operation-group qa-panel">
       
     <div class="secondary-actions">
-      <button onclick="callApi('endpoint3')" data-testid="movimientos-button" disabled>
+      <button onclick="callApi('movimientos')" data-testid="movimientos-button">
         Movimientos
       </button>
       <button onclick="callApi('endpoint4')" data-testid="pago-button" disabled>
