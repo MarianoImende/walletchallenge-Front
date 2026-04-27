@@ -1,7 +1,7 @@
-// Función de ejemplo para llamadas a la API
-
+// Función para consultar saldo desde una cuenta renderizada en la grilla
 async function consultarSaldoDesdeCuenta(numeroCuenta) {
   const cuentaInput = document.getElementById('cuenta');
+
   if (cuentaInput) {
     cuentaInput.value = numeroCuenta;
   }
@@ -14,29 +14,36 @@ async function callApi(endpoint) {
   const numero_cuenta = document.getElementById('cuenta')?.value.trim() || '';
   const fecha_desde = document.getElementById('fechaDesde')?.value.trim() || '20200909';
   const fecha_hasta = document.getElementById('fechaHasta')?.value.trim() || '20210909';
+
   const prod = "https://walletchallenge-back.onrender.com/wallet/";
 
   let jsonData = {};
   let responseDiv = null;
   let sectionName = '';
+  let url = `${prod}${endpoint}`;
 
-  // Definir body, div y sección según endpoint
+  // Definir body, div, sección y URL según endpoint
   if (endpoint === 'cuentas') {
     jsonData = { numero_tarjeta: numero_tarjeta };
     responseDiv = document.getElementById('responseCuentas');
     sectionName = 'cuentas';
-} else if (endpoint === 'saldo') {
-  jsonData = { numero_cuenta: numero_cuenta };
-  responseDiv = document.getElementById('saldoInline');
-  sectionName = 'cuentas';
-} else if (endpoint === 'movimientos') {
-  jsonData = {
-    numero_cuenta: numero_cuenta,
-    tipo: "CA $"
-  };
-  responseDiv = document.getElementById('responseMovimientos');
-  sectionName = 'movimientos';
-  else {
+
+  } else if (endpoint === 'saldo') {
+    jsonData = { numero_cuenta: numero_cuenta };
+    responseDiv = document.getElementById('saldoInline');
+    sectionName = 'cuentas';
+
+  } else if (endpoint === 'movimientos') {
+    jsonData = {
+      numero_cuenta: numero_cuenta,
+      tipo: "CA $"
+    };
+
+    responseDiv = document.getElementById('responseMovimientos');
+    sectionName = 'movimientos';
+    url = `${prod}ultmovimientos?fecha_desde=${fecha_desde}&fecha_hasta=${fecha_hasta}`;
+
+  } else {
     alert(`Endpoint no soportado todavía: ${endpoint}`);
     return;
   }
@@ -49,25 +56,20 @@ async function callApi(endpoint) {
     return;
   }
 
-  if (endpoint === 'saldo' && !numero_cuenta) {
+  if ((endpoint === 'saldo' || endpoint === 'movimientos') && !numero_cuenta) {
     responseDiv.className = 'warning';
-    responseDiv.innerHTML = '';
     responseDiv.innerHTML = 'Advertencia: debe ingresar un número de cuenta';
     openSection(sectionName);
     return;
   }
 
-  let url = `${prod}${endpoint}`;
-  if (endpoint === 'movimientos') {
-    url = `${prod}ultmovimientos?fecha_desde=${fecha_desde}&fecha_hasta=${fecha_hasta}`;
-  }
   // Mostrar loading
   responseDiv.className = 'response';
   responseDiv.innerHTML = 'Cargando...';
   openSection(sectionName);
 
   try {
-    const response = await fetch(`${prod}${endpoint}`, {
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -92,10 +94,16 @@ async function callApi(endpoint) {
     if (response.ok) {
       if (endpoint === 'cuentas') {
         responseDiv.innerHTML = getTablaCuentas(data);
+
       } else if (endpoint === 'saldo') {
         responseDiv.innerHTML = getTablaSaldo(data, numero_cuenta);
+
+      } else if (endpoint === 'movimientos') {
+        responseDiv.innerHTML = getTablaMovimientos(data);
       }
+
       openSection(sectionName);
+
     } else {
       responseDiv.className = 'error';
       responseDiv.innerHTML = `Error: ${data.detail || 'Error desconocido'}`;
@@ -109,43 +117,6 @@ async function callApi(endpoint) {
   }
 }
 
-/*
-
-function getTablaDatosUsuario(data) {
-  let table = `
-    <table class="my-custom-table">
-      <thead>
-        <tr>
-          <th>Clave</th>
-          <th>Valor</th>
-        </tr>
-      </thead>
-      <tbody>
-  `;
-
-  // Claves principales
-  for (let key in data) {
-    if (key !== 'tarjetas' && key !== 'access_token' && key !== 'access_token_expires' && key !== 'token_type') {
-      table += `<tr><td>${key}</td><td>${data[key]}</td></tr>`;
-    }
-  }
-
-  // Tarjetas (agrupadas mejor)
-  if (data.tarjetas && Array.isArray(data.tarjetas)) {
-    data.tarjetas.forEach((tarjeta, index) => {
-      table += `
-        <tr class="tarjeta-row">
-          <td>Tarjeta ${index + 1}</td>
-          <td>${tarjeta.descripcion} · ${tarjeta.numero}</td>
-        </tr>
-      `;
-    });
-  }
-
-  table += '</tbody></table>';
-  return table;
-}
-*/
 function getTablaCuentas(data) {
   let html = '<div class="cuentas-grid">';
 
@@ -177,6 +148,42 @@ function getTablaCuentas(data) {
   return html;
 }
 
+function getTablaSaldo(data, numero_cuenta) {
+  return `
+    <div class="saldo-card">
+      <h3>Saldo disponible</h3>
+      <div class="saldo-cuenta" data-testid="saldo-cuenta">Cuenta ${numero_cuenta}</div>
+      <p data-testid="saldo-monto">$ ${data.saldo}</p>
+    </div>
+  `;
+}
+
+function getTablaMovimientos(data) {
+  let html = '<div class="cuentas-grid">';
+
+  if (data.movimientos && Array.isArray(data.movimientos)) {
+    data.movimientos.forEach((movimiento, index) => {
+      html += `
+        <div class="cuenta-card" data-testid="movimiento-${index + 1}">
+          <div class="cuenta-card-header">Movimiento ${index + 1}</div>
+          <div data-testid="movimiento-fecha-${index + 1}">Fecha: ${movimiento.fecha}</div>
+          <div data-testid="movimiento-descripcion-${index + 1}">${movimiento.descripcion}</div>
+          <div data-testid="movimiento-monto-${index + 1}">$ ${movimiento.monto}</div>
+        </div>
+      `;
+    });
+  } else {
+    html += `
+      <div class="warning">
+        No se encontraron movimientos.
+      </div>
+    `;
+  }
+
+  html += '</div>';
+  return html;
+}
+
 function getTablaDatosUsuario(data) {
   let table = `
     <table class="my-custom-table">
@@ -192,16 +199,23 @@ function getTablaDatosUsuario(data) {
 
   // Claves principales
   for (let key in data) {
-    if (key !== 'tarjetas' && key !== 'access_token' && key !== 'access_token_expires' && key !== 'token_type') {
-      table += `<tr>
-                  <td>${key}</td>
-                  <td>${data[key]}</td>
-                  <td>-</td>
-                </tr>`;
+    if (
+      key !== 'tarjetas' &&
+      key !== 'access_token' &&
+      key !== 'access_token_expires' &&
+      key !== 'token_type'
+    ) {
+      table += `
+        <tr>
+          <td>${key}</td>
+          <td>${data[key]}</td>
+          <td>-</td>
+        </tr>
+      `;
     }
   }
 
-  // Tarjetas (agrupadas mejor + estado)
+  // Tarjetas
   if (data.tarjetas && Array.isArray(data.tarjetas)) {
     data.tarjetas.forEach((tarjeta, index) => {
       let estadoClass = 'estado-default';
@@ -215,12 +229,12 @@ function getTablaDatosUsuario(data) {
       table += `
         <tr class="tarjeta-row">
           <td>Tarjeta ${index + 1}</td>
-            <td>${tarjeta.descripcion} · ${tarjeta.numero}</td>
-            <td>
-              <span class="estado-badge ${estadoClass}">
-                ${tarjeta.estado || 'Desconocido'}
-              </span>
-            </td>
+          <td>${tarjeta.descripcion} · ${tarjeta.numero}</td>
+          <td>
+            <span class="estado-badge ${estadoClass}">
+              ${tarjeta.estado || 'Desconocido'}
+            </span>
+          </td>
         </tr>
       `;
     });
@@ -230,100 +244,6 @@ function getTablaDatosUsuario(data) {
   return table;
 }
 
-/* v2
-function getTablaCuentas(data) {
-  let html = '<div class="cuentas-grid">';
-
-  if (data.cuentas && Array.isArray(data.cuentas)) {
-    data.cuentas.forEach((cuenta, index) => {
-      html += `
-        <div class="cuenta-card">
-          <div class="cuenta-card-header">Cuenta ${index + 1}</div>
-          <div class="cuenta-tipo">${cuenta.tipo}</div>
-          <div class="cuenta-numero">${cuenta.numero_cuenta}</div>
-        </div>
-      `;
-    });
-  } else {
-    html += `
-      <div class="warning">
-        No se encontraron cuentas para la tarjeta seleccionada.
-      </div>
-    `;
-  }
-
-  html += '</div>';
-  return html;
-}
-*/
-
-/* v1
-function getTablaCuentas(data) {
-  let table = '<table class="my-custom-table"><thead><tr><th>Clave</th><th>Valor</th></tr></thead><tbody>';
-
-  // Mostrar claves principales
-  for (let key in data) {
-    if (key !== 'cuentas') {
-      table += `<tr><td>${key}</td><td>${data[key]}</td></tr>`;
-    }
-  }
-
-  // Mostrar cuentas si existen
-  if (data.cuentas && Array.isArray(data.cuentas)) {
-    data.cuentas.forEach((cuenta, index) => {
-      table += `<tr><td>Cuenta ${index + 1} - Número</td><td>${cuenta.numero_cuenta}</td></tr>`;
-      table += `<tr><td>Cuenta ${index + 1} - Tipo</td><td>${cuenta.tipo}</td></tr>`;
-    });
-  }
-
-  table += '</tbody></table>';
-  return table;
-}
-*/
-
-/*
-function getTablaSaldo(data, numero_cuenta) {
-  let table = '<table class="my-custom-table"><thead><tr><th>Clave</th><th>Valor</th></tr></thead><tbody>';
-
-  table += `<tr><td>Número de cuenta</td><td>${numero_cuenta}</td></tr>`;
-  table += `<tr><td>Saldo</td><td>${data.saldo}</td></tr>`;
-
-  table += '</tbody></table>';
-  return table;
-}
-*/
-function getTablaSaldo(data, numero_cuenta) {
-  return `
-    <div class="saldo-card">
-      <h3>Saldo disponible</h3>
-      <div class="saldo-cuenta" data-testid="saldo-cuenta">Cuenta ${numero_cuenta}</div>
-      <p data-testid="saldo-monto">$ ${data.saldo}</p>
-    </div>
-  `;
-}
-
- function getTablaMovimientos(data) {
-  let html = '<div class="cuentas-grid">';
-
-  if (data.movimientos && Array.isArray(data.movimientos)) {
-    data.movimientos.forEach((movimiento, index) => {
-      html += `
-        <div class="cuenta-card" data-testid="movimiento-${index + 1}">
-          <div class="cuenta-card-header">Movimiento ${index + 1}</div>
-          <div data-testid="movimiento-fecha-${index + 1}">Fecha: ${movimiento.fecha}</div>
-          <div data-testid="movimiento-descripcion-${index + 1}">${movimiento.descripcion}</div>
-          <div data-testid="movimiento-monto-${index + 1}">$ ${movimiento.monto}</div>
-        </div>
-      `;
-    });
-  } else {
-    html += `<div class="warning">No se encontraron movimientos.</div>`;
-  }
-
-  html += '</div>';
-  return html;
-}
-  
 async function logout() {
   const token = localStorage.getItem('token');
 
