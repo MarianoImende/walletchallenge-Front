@@ -47,6 +47,7 @@
       <div class="operation-group">
         <div class="field-block">
           <label for="cuenta">Cuenta(modo testing)</label>
+          <p class="login-security">Modo testing: podés ingresar una cuenta manualmente.</p>
           <input
             type="text"
             id="cuenta"
@@ -62,8 +63,31 @@
           <!-- NUEVO: contenedor del saldo -->
     </div>
 
-  <input id="fechaDesde" data-testid="fecha-desde-input" value="">
-  <input id="fechaHasta" data-testid="fecha-hasta-input" value="">
+<div class="operation-group">
+  <div class="field-block">
+    <label for="fechaDesde">Fecha desde</label>
+    <input
+      type="text"
+      id="fechaDesde"
+      data-testid="fecha-desde-input"
+      placeholder="YYYYMMDD"
+      value="20200909"
+      maxlength="8"
+    >
+  </div>
+
+  <div class="field-block">
+    <label for="fechaHasta">Fecha hasta</label>
+    <input
+      type="text"
+      id="fechaHasta"
+      data-testid="fecha-hasta-input"
+      placeholder="YYYYMMDD"
+      value="20210909"
+      maxlength="8"
+    >
+  </div>
+</div>
       
   <div class="operation-group qa-panel">
       
