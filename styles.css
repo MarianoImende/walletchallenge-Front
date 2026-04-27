@@ -234,7 +234,7 @@ button:disabled {
   display: flex;
   gap: 36px;
   justify-content: center;
-  align-items: stretch;
+  align-items: flex-start;
   flex-wrap: wrap;
   margin-bottom: 14px;
 }
