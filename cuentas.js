@@ -12,7 +12,8 @@ async function consultarSaldoDesdeCuenta(numeroCuenta) {
 async function callApi(endpoint) {
   const numero_tarjeta = document.getElementById('tarjeta')?.value.trim() || '';
   const numero_cuenta = document.getElementById('cuenta')?.value.trim() || '';
-
+  const fecha_desde = document.getElementById('fechaDesde')?.value.trim() || '20200909';
+  const fecha_hasta = document.getElementById('fechaHasta')?.value.trim() || '20210909';
   const prod = "https://walletchallenge-back.onrender.com/wallet/";
 
   let jsonData = {};
@@ -28,7 +29,14 @@ async function callApi(endpoint) {
   jsonData = { numero_cuenta: numero_cuenta };
   responseDiv = document.getElementById('saldoInline');
   sectionName = 'cuentas';
-} else {
+} else if (endpoint === 'movimientos') {
+  jsonData = {
+    numero_cuenta: numero_cuenta,
+    tipo: "CA $"
+  };
+  responseDiv = document.getElementById('responseMovimientos');
+  sectionName = 'movimientos';
+  else {
     alert(`Endpoint no soportado todavía: ${endpoint}`);
     return;
   }
@@ -49,6 +57,10 @@ async function callApi(endpoint) {
     return;
   }
 
+  let url = `${prod}${endpoint}`;
+  if (endpoint === 'movimientos') {
+    url = `${prod}ultmovimientos?fecha_desde=${fecha_desde}&fecha_hasta=${fecha_hasta}`;
+  }
   // Mostrar loading
   responseDiv.className = 'response';
   responseDiv.innerHTML = 'Cargando...';
@@ -290,6 +302,28 @@ function getTablaSaldo(data, numero_cuenta) {
   `;
 }
 
+ function getTablaMovimientos(data) {
+  let html = '<div class="cuentas-grid">';
+
+  if (data.movimientos && Array.isArray(data.movimientos)) {
+    data.movimientos.forEach((movimiento, index) => {
+      html += `
+        <div class="cuenta-card" data-testid="movimiento-${index + 1}">
+          <div class="cuenta-card-header">Movimiento ${index + 1}</div>
+          <div data-testid="movimiento-fecha-${index + 1}">Fecha: ${movimiento.fecha}</div>
+          <div data-testid="movimiento-descripcion-${index + 1}">${movimiento.descripcion}</div>
+          <div data-testid="movimiento-monto-${index + 1}">$ ${movimiento.monto}</div>
+        </div>
+      `;
+    });
+  } else {
+    html += `<div class="warning">No se encontraron movimientos.</div>`;
+  }
+
+  html += '</div>';
+  return html;
+}
+  
 async function logout() {
   const token = localStorage.getItem('token');
 
