@@ -12,8 +12,8 @@ async function consultarSaldoDesdeCuenta(numeroCuenta) {
 async function callApi(endpoint) {
   const numero_tarjeta = document.getElementById('tarjeta')?.value.trim() || '';
   const numero_cuenta = document.getElementById('cuenta')?.value.trim() || '';
-  const fecha_desde = document.getElementById('fechaDesde')?.value.trim() || '20200909';
-  const fecha_hasta = document.getElementById('fechaHasta')?.value.trim() || '20210909';
+  const fecha_desde = document.getElementById('fechaDesde')?.value.trim() || '';
+  const fecha_hasta = document.getElementById('fechaHasta')?.value.trim() || '';
 
   const prod = "https://walletchallenge-back.onrender.com/wallet/";
 
