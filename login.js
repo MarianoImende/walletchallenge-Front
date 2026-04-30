@@ -95,7 +95,7 @@ document.getElementById('login-form').addEventListener('submit', async function(
           responseDiv.innerHTML = 'Login Exitoso, redirigiendo a la página principal...'
           setTimeout(() => {
             window.location.href = 'home.html';
-          }, 3000); 
+          }, 2000); 
         } else {
           console.log("Response JSON no cumple con el esquema esperado:", validate.errors);
           responseDiv.className = 'error';
