@@ -1,47 +1,62 @@
 const loginForm = document.getElementById('login-form');
-const schema={
-  "type": "object",
-  "additionalProperties": false,
-  "properties": {
-      "access_token": {
-      "type": "string",
-      "pattern":"^[a-zA-Z0-9]{20,40}\\.[a-zA-Z0-9]+\\.[a-zA-Z0-9_-]+$"
-      },
-      "token_type": {
-      "type": "string",
-      "pattern":"^bearer$"
-      },
-      "access_token_expires": {
-          "type": "integer",
-          "pattern":"^\\d+$"
-      },
-      "tarjetas": {
-      "type": "array",
-      "items": {
-          "type": "object",
-          "properties": {
-          "descripcion": {
-              "type": "string",
-              "pattern":"^[A-Z\\s]{1,40}$"
+
+const schema = {
+  type: "object",
+  additionalProperties: false,
+
+  properties: {
+    access_token: {
+      type: "string",
+      pattern: "^[a-zA-Z0-9]{20,40}\\.[a-zA-Z0-9]+\\.[a-zA-Z0-9_-]+$"
+    },
+
+    token_type: {
+      type: "string",
+      pattern: "^bearer$"
+    },
+
+    access_token_expires: {
+      type: "integer",
+      minimum: 1
+    },
+
+    tarjetas: {
+      type: "array",
+      items: {
+        type: "object",
+        additionalProperties: false,
+
+        properties: {
+          descripcion: {
+            type: "string",
+            pattern: "^[A-Z\\s]{1,30}$"
           },
-          "numero": {
-              "type": "string",
-              "pattern":"^[0-9]{12,19}$"
+          numero: {
+            type: "string",
+            pattern: "^[0-9]{12,19}$"
+          },
+          estado: {
+            type: "string",
+            pattern: "^(activa|bloqueada|pausada)$"
           }
-          },
-          "required": [
+        },
+
+        required: [
           "descripcion",
-          "numero"
-          ]
+          "numero",
+          "estado"
+        ]
       }
-      }
+    }
   },
-  "required": [
-      "access_token",
-      "token_type",
-      "access_token_expires",
-      "tarjetas"
-  ]};
+
+  required: [
+    "access_token",
+    "token_type",
+    "access_token_expires",
+    "tarjetas"
+  ]
+};
 
 document.getElementById('login-form').addEventListener('submit', async function(event) {
     event.preventDefault();
